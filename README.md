@@ -1,45 +1,70 @@
 # Wulftek Website
 
-Client website for **Wulftek** (vehicle remapping / tuning), built by Talon Insights.
-
-## Status
-
-`index.html` is a single-file SPA (hash-routed views: home, what-is-remapping,
-performance, economy, agricultural, vehicles, per-marque tables, about, events,
-booking). Imported from the design draft `wulftek-tuning_7.html` on 24 Aug 2026.
-
-The client's brief in `..\WULFTEK PROMPT.txt` is satisfied by this version:
-reg lookup dominates the hero over a background photo, the engine-software
-diagram and "paper" element are gone, and a "What is remapping?" page exists
-with a shortened version on the home page.
-
-## Placeholders still to fill before launch
-
-- **Photos** — the `IMG` config in the script currently points at freely
-  licensed Wikimedia Commons stock; swap for WulfTek's own photography
-  (each slot has an art-direction `brief` written in the config).
-- **Contact details** — `CONTACT.phone` / `CONTACT.email` in the script are
-  empty, so call/email links are inert.
-- **Address** — `[STREET]` / `[POSTCODE]` placeholders in the LocalBusiness
-  JSON-LD in the head.
-- **Reg lookup** — `VEH` is a small demo dataset; a real DVLA/vehicle-data API
-  is needed for live lookups.
-- **Booking form** — front-end only; submissions go nowhere yet.
-
-## Deployment
+Client website for **WulfTek Tuning** (ECU remapping, Telford, Shropshire),
+built by Talon Insights.
 
 - **Live:** https://wulftek-website.vercel.app
 - **GitHub:** `TalonInsights/Wulftek-Website` (public, `main`)
-- **Vercel:** `talon-insights` team, project `wulftek-website`. Static site,
-  no build step — pushes to `main` deploy automatically.
-- Security headers are set in `vercel.json`. No rewrites are needed because
-  the site is hash-routed, so every route is served from `index.html` at `/`.
+- **Vercel:** `talon-insights` team, project `wulftek-website`. Pure static —
+  Vercel runs no build of its own, and pushes to `main` deploy automatically.
 
-## Known limitation: hash routing and SEO
+## How the site is put together
 
-All nine views live behind `#/` fragments, which search engines do not index as
-separate URLs. The per-route `<title>` and `<meta description>` the script sets
-are never seen by a crawler, so the whole site competes as a single page. For a
-local-search business ("ECU remapping Telford", "tractor remapping Shropshire")
-this is worth converting to real paths before any SEO push — it needs a router
-change plus one rewrite per route in `vercel.json`.
+Static multi-page site. Every page is a real URL with its own title, meta
+description and canonical, so each one can rank on its own.
+
+```
+src/                 source of truth — edit here
+  layout.html        the page shell (head, meta, script tags)
+  partials/          header.html, footer.html — shared across every page
+  pages/             the body content of each page, one file each
+    _marque.html     template behind the per-make pages
+tools/build.mjs      assembles src/ into the HTML files at the repo root
+assets/
+  css/site.css       all styling
+  js/config.js       contact details and photography — start here
+  js/data.js         vehicle and marque data
+  js/site.js         nav, scroll reveals, placeholder images
+  js/reg-lookup.js   the registration lookup
+  js/booking.js      the booking enquiry form
+```
+
+The HTML files at the repo root (`index.html`, `about.html`, `remap/*.html`, …)
+are **generated**. Don't edit them by hand — change `src/` or the data and run:
+
+```bash
+node tools/build.mjs
+```
+
+That rewrites all 25 pages plus `sitemap.xml`. Adding a make to `WT.MARQUE` in
+`assets/js/data.js` and re-running the build is all it takes to get a new
+`/remap/<make>` page, complete with its sitemap entry.
+
+`vercel.json` sets `cleanUrls`, so `/about` serves `about.html` — keep links
+extensionless.
+
+## Placeholders still to fill before launch
+
+- **Contact details** — `WT.CONTACT` in `assets/js/config.js` is empty, so the
+  call/email links are inert. This is the highest-priority gap.
+- **Photography** — the home-page hero is WulfTek's own photo. The remaining
+  slots (`road`, `van`, `field`, `engine`, `shop`, `heritage`) are still stock
+  images from Wikimedia Commons; each carries an art-direction `brief` in
+  `config.js` describing the photo that belongs there.
+- **Address** — `[STREET]` / `[POSTCODE]` placeholders in the business schema
+  in `tools/build.mjs`.
+- **Registration lookup** — `WT.VEH` is a ten-vehicle demonstration dataset.
+  Live lookups need a real vehicle-data API.
+- **Booking form** — front-end only. Submitting shows the confirmation but
+  sends nothing; it needs an email service wiring up.
+- **Domain** — the site is on `wulftek-website.vercel.app`. If WulfTek owns
+  `wulftektuning.com`, add it in Vercel and update `SITE` in `tools/build.mjs`,
+  then rebuild so canonicals, Open Graph URLs and the sitemap follow.
+
+## Worth raising with the client
+
+The van in the hero photo advertises **DPF SOLUTIONS** and **GEARBOX TUNING**.
+The site copy states plainly and repeatedly that WulfTek does *not* remove DPF,
+EGR or AdBlue equipment, and gearbox tuning isn't offered as a service anywhere
+on the site. The photo and the copy currently contradict each other — worth
+settling which is right before launch.

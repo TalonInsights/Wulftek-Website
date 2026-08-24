@@ -1,0 +1,113 @@
+<div class="sec sm">
+  <div class="wrap">
+    <div class="head rv" style="max-width:54ch;">
+      <span class="kicker">Booking</span>
+      <h1 style="font-size:clamp(2.1rem,4.2vw,3.2rem);">Book your vehicle in</h1>
+      <p class="lede">Nothing is committed at this point. Fill in what you know, leave the rest blank, and you'll get a reply with what's realistic for the vehicle, what it costs, and a couple of dates.</p>
+    </div>
+
+    <div class="two lead" style="align-items:start;">
+      <div class="bkcard rv">
+        <div class="bkbar" role="tablist">
+          <button type="button" data-step="1" class="on">1. Vehicle</button>
+          <button type="button" data-step="2">2. The job</button>
+          <button type="button" data-step="3">3. You</button>
+        </div>
+        <div class="bkb">
+          <form id="bookform" novalidate>
+
+            <div class="pane on" data-pane="1">
+              <label class="fld" style="margin-bottom:20px;">
+                <span>Registration</span>
+                <div class="plate" style="max-width:300px;box-shadow:none;">
+                  <span class="gbb" aria-hidden="true"><span class="st">★</span><b>UK</b></span>
+                  <input id="b-reg" type="text" maxlength="9" placeholder="YOUR REG" autocomplete="off" spellcheck="false" style="font-size:1.35rem;padding:10px 8px;">
+                </div>
+              </label>
+              <div class="fields f2" style="margin-bottom:16px;">
+                <label class="fld"><span>Make</span><input id="b-make" type="text" placeholder="Audi"></label>
+                <label class="fld"><span>Model &amp; engine</span><input id="b-model" type="text" placeholder="A4 2.0 TDI"></label>
+              </div>
+              <div class="fields f3" style="margin-bottom:16px;">
+                <label class="fld"><span>Year</span><input id="b-year" type="text" inputmode="numeric" placeholder="2018"></label>
+                <label class="fld"><span>Mileage</span><input id="b-miles" type="text" inputmode="numeric" placeholder="86,000"></label>
+                <label class="fld"><span>Gearbox</span><select id="b-box"><option value="">—</option><option>Manual</option><option>Automatic</option><option>DSG / dual clutch</option><option>Not applicable</option></select></label>
+              </div>
+              <label class="fld"><span>Anything already fitted or done to it</span><textarea id="b-mods" placeholder="Exhaust, intake, intercooler, previous remap, recent work. If it's completely standard, say so — that's useful too."></textarea></label>
+              <div class="bknav">
+                <span class="tiny sub">Step 1 of 3</span>
+                <button type="button" class="btn d" data-go="2">Continue <span class="ar">→</span></button>
+              </div>
+            </div>
+
+            <div class="pane" data-pane="2">
+              <div class="pick" style="margin-bottom:20px;">
+                <div class="p1"><input type="radio" name="job" id="jb1" value="Performance"><label for="jb1"><small>Performance</small><strong>More power</strong><em>Response, torque, overtaking.</em></label></div>
+                <div class="p2"><input type="radio" name="job" id="jb2" value="Economy"><label for="jb2"><small>Economy</small><strong>Better mpg</strong><em>Mileage that costs money.</em></label></div>
+                <div class="p3"><input type="radio" name="job" id="jb3" value="Agricultural"><label for="jb3"><small>Agricultural</small><strong>Machinery</strong><em>Tractor, telehandler, plant.</em></label></div>
+              </div>
+              <label class="fld" style="margin-bottom:16px;"><span>What do you want it to do that it doesn't do now?</span><textarea id="b-want" placeholder="Tows a caravan and runs out of puff on hills. Or: does 400 miles a week and the fuel bill is silly. Plain English is fine."></textarea></label>
+              <div class="fields f2">
+                <label class="fld"><span>Still under warranty?</span><select id="b-war"><option value="">—</option><option>No</option><option>Yes, manufacturer</option><option>Yes, third party</option><option>Not sure</option></select></label>
+                <label class="fld"><span>How soon?</span><select id="b-when"><option value="">—</option><option>No rush</option><option>Next few weeks</option><option>This week if possible</option><option>Just pricing it up</option></select></label>
+              </div>
+              <div class="bknav">
+                <button type="button" class="btn solidpad o" data-go="1">← Back</button>
+                <button type="button" class="btn d" data-go="3">Continue <span class="ar">→</span></button>
+              </div>
+            </div>
+
+            <div class="pane" data-pane="3">
+              <div class="fields f2" style="margin-bottom:16px;">
+                <label class="fld"><span>Name</span><input id="b-name" type="text" autocomplete="name" placeholder="First and last"></label>
+                <label class="fld"><span>Phone</span><input id="b-phone" type="tel" autocomplete="tel" placeholder="07…"></label>
+              </div>
+              <div class="fields f2" style="margin-bottom:16px;">
+                <label class="fld"><span>Email</span><input id="b-email" type="email" autocomplete="email" placeholder="you@…"></label>
+                <label class="fld"><span>Where are you?</span><input id="b-town" type="text" placeholder="Town or postcode"></label>
+              </div>
+              <label class="fld" style="margin-bottom:18px;"><span>Anything else worth knowing</span><textarea id="b-notes" placeholder="Optional."></textarea></label>
+              <div class="bknav">
+                <button type="button" class="btn solidpad o" data-go="2">← Back</button>
+                <button type="submit" class="btn p">Send enquiry <span class="ar">→</span></button>
+              </div>
+              <div class="done-msg" id="bkdone"><b>That's gone through.</b> We'll come back to you with what's realistic for the vehicle, what it'll cost, and a couple of dates. Nothing is committed until you say so.</div>
+            </div>
+
+          </form>
+        </div>
+      </div>
+
+      <div class="rv" style="position:sticky;top:96px;">
+        <div class="sumry" style="margin-bottom:16px;">
+          <h4>Your enquiry so far</h4>
+          <div class="sl"><span>Reg</span><b class="e" id="s-reg">—</b></div>
+          <div class="sl"><span>Vehicle</span><b class="e" id="s-veh">—</b></div>
+          <div class="sl"><span>Year / miles</span><b class="e" id="s-ym">—</b></div>
+          <div class="sl"><span>Modified</span><b class="e" id="s-mods">—</b></div>
+          <div class="sl"><span>Looking for</span><b class="e" id="s-job">—</b></div>
+          <div class="sl"><span>Warranty</span><b class="e" id="s-war">—</b></div>
+          <div class="sl"><span>Contact</span><b class="e" id="s-con">—</b></div>
+        </div>
+        <div class="card">
+          <h3 style="margin-bottom:10px;">Rather just ring?</h3>
+          <p style="margin-bottom:12px;">Some things are easier said out loud, particularly on machinery.</p>
+          <p class="mono" style="font-size:.92rem;">
+            <a href="#" data-contact="tel" style="color:var(--accent);text-decoration:none;font-weight:600;">Call the workshop</a><br>
+            <a href="#" data-contact="email" style="color:var(--accent);text-decoration:none;font-weight:600;">Send us an email</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="hr">
+
+<div class="sec sm">
+  <div class="wrap grid g3 rv">
+    <div><h4 style="margin-bottom:10px;">Workshop</h4><p class="sub" style="font-size:.94rem;">Telford, Shropshire.<br>Full address confirmed when your slot is booked.</p></div>
+    <div><h4 style="margin-bottom:10px;">Turnaround</h4><p class="sub" style="font-size:.94rem;">Same day service available on most vehicles. Agricultural work is booked around your season.</p></div>
+    <div><h4 style="margin-bottom:10px;">Where we cover</h4><p class="sub" style="font-size:.94rem;">Telford and Shropshire as standard, out to Shrewsbury, Wolverhampton and Stafford without much fuss. On-farm visits by arrangement.</p></div>
+  </div>
+</div>

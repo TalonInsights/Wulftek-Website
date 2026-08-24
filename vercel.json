@@ -1,6 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "trailingSlash": false,
+  "cleanUrls": true,
 
   "redirects": [
     { "source": "/index.html", "destination": "/", "permanent": true }
@@ -15,6 +16,12 @@
         { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains; preload" },
         { "key": "Permissions-Policy", "value": "geolocation=(), microphone=(), camera=(), payment=(), interest-cohort=()" },
         { "key": "X-Frame-Options", "value": "SAMEORIGIN" }
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=604800, stale-while-revalidate=86400" }
       ]
     },
     {
