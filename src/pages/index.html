@@ -37,16 +37,86 @@
   </div>
 </div>
 
-<div class="proof">
-  <div class="wrap proofin">
-    <div><span class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.6l2.6 5.27 5.82.85-4.21 4.1.99 5.79L12 16.87l-5.2 2.74.99-5.79-4.21-4.1 5.82-.85z"/></svg></span><div><b>5.0</b><em>Customer rating</em></div></div>
-    <div><span class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.3 11.3l1.6-3.7a2 2 0 0 1 1.83-1.2h6.54a2 2 0 0 1 1.83 1.2l1.6 3.7"/><path d="M3.9 11.3h16.2a1.3 1.3 0 0 1 1.3 1.3v2.5a1 1 0 0 1-1 1H3.6a1 1 0 0 1-1-1v-2.5a1.3 1.3 0 0 1 1.3-1.3z"/><circle cx="7.4" cy="16.1" r="1.55"/><circle cx="16.6" cy="16.1" r="1.55"/></svg></span><div><b>1000+</b><em>Vehicles tuned</em></div></div>
-    <div><span class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.9l7.2 2.7v5.6c0 4.3-3 8.1-7.2 9.4-4.2-1.3-7.2-5.1-7.2-9.4V5.6z"/><path d="M9 11.9l2.1 2.1 4-4"/></svg></span><div><b>Lifetime</b><em>Software warranty</em></div></div>
-    <div><span class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.6"/><path d="M12 7.2V12l3.2 2"/></svg></span><div><b>Same day</b><em>Service available</em></div></div>
+<!-- readout strip: the instrument band that carries the hero's darkness
+     into the light page. Numbers count up once on first view. -->
+<div class="readout" aria-label="WulfTek in numbers">
+  <div class="wrap rdin">
+    <div><b><span data-count="1000" data-suffix="+">1000+</span></b><em>Vehicles tuned</em></div>
+    <div><b><span data-count="5.0" data-decimals="1">5.0</span></b><em>Customer rating</em></div>
+    <div><b><span data-count="0">0</span></b><em>Original files ever lost</em></div>
+    <div><b>Same day</b><em>Service available</em></div>
   </div>
 </div>
 
-<!-- three services -->
+<!-- the headroom curve: the one graphic that sells the product.
+     Doubles as the shortened what-is-remapping, per the client brief. -->
+<div class="sec" id="headroom">
+  <div class="wrap">
+    <div class="two lead" style="align-items:start;">
+      <div class="rv">
+        <span class="kicker">In plain English</span>
+        <h2>The gap in this picture is already yours</h2>
+        <p class="lede" style="margin-top:16px;">Your engine is run by software, and the factory writes one cautious file for the whole world — poor fuel, extreme climates, skipped services. Built for one vehicle, driven by one person, there's real headroom left in it.</p>
+        <p class="sub" style="margin-top:16px;font-size:.98rem;">The grey line is how your engine leaves the factory. The red line is the same engine with a file written for it. Nothing bolted on, nothing removed — and it can be put back exactly as it was.</p>
+        <div class="btns" style="margin-top:26px;">
+          <a class="btn d" href="/what-is-remapping">Read the full explanation <span class="ar">→</span></a>
+        </div>
+      </div>
+      <figure class="curvebox rv" aria-label="Chart comparing factory torque with a WulfTek remap. The remapped curve sits well above the factory curve across the whole rev range.">
+        <div class="cvleg">
+          <span class="cl cl-f">Factory file</span>
+          <span class="cl cl-r">WulfTek file</span>
+          <output class="cvread mono" id="cvread" aria-live="off">move along the curve&nbsp;→</output>
+        </div>
+        <div class="cvstage" id="cvstage">
+          <svg id="cvsvg" viewBox="0 0 800 420" role="img" aria-hidden="true">
+            <!-- grid -->
+            <g class="cvgrid">
+              <line x1="60" y1="380" x2="780" y2="380"/>
+              <line x1="60" y1="267" x2="780" y2="267"/>
+              <line x1="60" y1="153" x2="780" y2="153"/>
+              <line x1="60" y1="40"  x2="780" y2="40"/>
+            </g>
+            <g class="cvax">
+              <text x="60"  y="404">1,000 rpm</text>
+              <text x="240" y="404">2,000</text>
+              <text x="420" y="404">3,000</text>
+              <text x="600" y="404">4,000</text>
+              <text x="780" y="404" text-anchor="end">5,000</text>
+              <text x="52" y="271" text-anchor="end">200</text>
+              <text x="52" y="157" text-anchor="end">300</text>
+              <text x="52" y="44"  text-anchor="end">400</text>
+              <text x="66" y="30">torque, lb-ft</text>
+            </g>
+            <!-- the headroom itself -->
+            <path class="cvgap" id="cvgap" d="M 60.0 302.9 C 72.0 289.3 111.0 247.8 132.0 221.3 C 153.0 194.9 168.0 164.7 186.0 144.3 C 204.0 123.9 222.0 109.5 240.0 98.9 C 258.0 88.4 276.0 84.6 294.0 80.8 C 312.0 77.0 327.0 75.5 348.0 76.3 C 369.0 77.0 393.0 79.7 420.0 85.3 C 447.0 91.0 480.0 100.1 510.0 110.3 C 540.0 120.5 570.0 132.9 600.0 146.5 C 630.0 160.1 660.0 176.0 690.0 191.9 C 720.0 207.7 765.0 233.4 780.0 241.7 L 780.0 289.3 C 765.0 282.9 720.0 263.1 690.0 250.8 C 660.0 238.5 630.0 226.2 600.0 215.7 C 570.0 205.1 540.0 195.5 510.0 187.3 C 480.0 179.2 450.0 171.7 420.0 166.9 C 390.0 162.2 357.0 159.4 330.0 159.0 C 303.0 158.6 279.0 158.4 258.0 164.7 C 237.0 170.9 222.0 181.7 204.0 196.4 C 186.0 211.1 174.0 231.5 150.0 253.1 C 126.0 274.6 75.0 313.5 60.0 325.6 Z"/>
+            <text class="cvgaplabel" id="cvgaplabel" x="452" y="136">the headroom you already own</text>
+            <!-- curves -->
+            <path class="cvline cvf" id="cvf" d="M 60.0 325.6 C 75.0 313.5 126.0 274.6 150.0 253.1 C 174.0 231.5 186.0 211.1 204.0 196.4 C 222.0 181.7 237.0 170.9 258.0 164.7 C 279.0 158.4 303.0 158.6 330.0 159.0 C 357.0 159.4 390.0 162.2 420.0 166.9 C 450.0 171.7 480.0 179.2 510.0 187.3 C 540.0 195.5 570.0 205.1 600.0 215.7 C 630.0 226.2 660.0 238.5 690.0 250.8 C 720.0 263.1 765.0 282.9 780.0 289.3"/>
+            <path class="cvline cvr" id="cvr" d="M 60.0 302.9 C 72.0 289.3 111.0 247.8 132.0 221.3 C 153.0 194.9 168.0 164.7 186.0 144.3 C 204.0 123.9 222.0 109.5 240.0 98.9 C 258.0 88.4 276.0 84.6 294.0 80.8 C 312.0 77.0 327.0 75.5 348.0 76.3 C 369.0 77.0 393.0 79.7 420.0 85.3 C 447.0 91.0 480.0 100.1 510.0 110.3 C 540.0 120.5 570.0 132.9 600.0 146.5 C 630.0 160.1 660.0 176.0 690.0 191.9 C 720.0 207.7 765.0 233.4 780.0 241.7"/>
+            <!-- annotations -->
+            <g class="anno" id="annos">
+              <g><line x1="186" y1="144" x2="186" y2="196"/><circle cx="186" cy="144" r="3.4"/><text x="176" y="228" text-anchor="middle">pulling out<tspan x="176" dy="14">of junctions</tspan></text></g>
+              <g><line x1="348" y1="76" x2="348" y2="159"/><circle cx="348" cy="76" r="3.4"/><text x="348" y="188" text-anchor="middle">where you<tspan x="348" dy="14">overtake</tspan></text></g>
+              <g><line x1="690" y1="192" x2="690" y2="251"/><circle cx="690" cy="192" r="3.4"/><text x="690" y="292" text-anchor="middle">where brochures<tspan x="690" dy="14">take their photo</tspan></text></g>
+            </g>
+            <!-- reticle (driven by pointer) -->
+            <g class="reticle" id="reticle" style="opacity:0;">
+              <line id="rline" x1="348" y1="40" x2="348" y2="380"/>
+              <circle id="rdotf" cx="348" cy="159" r="4"/>
+              <circle id="rdotr" cx="348" cy="76" r="4"/>
+            </g>
+          </svg>
+        </div>
+        <figcaption class="tiny sub" style="margin-top:10px;">Illustrative shape for a typical 2.0 diesel. Your exact curves are logged on the vehicle, before and after, on the day.</figcaption>
+      </figure>
+    </div>
+  </div>
+</div>
+
+<hr class="hr">
+
+<!-- three services: the triptych -->
 <div class="sec">
   <div class="wrap">
     <div class="head rv">
@@ -54,7 +124,7 @@
       <h2>Three jobs, three different files</h2>
       <p class="lede">A farmer pulling a plough all day and a hot hatch on a B-road want opposite things from the same engine. Most places write one file and sell it three ways. We don't.</p>
     </div>
-    <div class="grid g3 rv">
+    <div class="triptych rv">
       <a class="disc c1" href="/performance">
         <div class="img" data-img="road"></div><div class="dbar"></div>
         <div class="din">
@@ -88,25 +158,7 @@
 
 <hr class="hr">
 
-<!-- short "what is a remap" -->
-<div class="sec">
-  <div class="wrap mrow rv">
-    <div class="img" data-img="engine" style="--ar:74%"></div>
-    <div>
-      <span class="kicker">In plain English</span>
-      <h2>Your engine is already run by software</h2>
-      <p class="lede" style="margin-top:16px;">Every modern engine has a small computer deciding how much fuel to inject, when to light it, and how hard the turbo blows. A remap rewrites those decisions for your specific vehicle.</p>
-      <p class="sub" style="margin-top:16px;font-size:.98rem;">Manufacturers set them conservatively because one file has to cope with poor fuel in one country, extreme heat in another, and owners who skip services. On most engines that leaves real headroom — and it's yours already. No parts come off, nothing is cut out, and it can be put back exactly as it was.</p>
-      <div class="btns" style="margin-top:26px;">
-        <a class="btn d" href="/what-is-remapping">Read the full explanation <span class="ar">→</span></a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<hr class="hr">
-
-<!-- process -->
+<!-- the job sheet -->
 <div class="sec">
   <div class="wrap">
     <div class="two lead">
@@ -116,26 +168,24 @@
       <p class="lede" style="margin-top:16px;">Nothing here is rushed and nothing is skipped. If a step throws up a problem, you hear about it before we carry on.</p>
       <div class="btns" style="margin-top:26px;"><a class="btn o" href="/what-is-remapping">What is a remap? <span class="ar">→</span></a></div>
     </div>
-    <div class="steps rv">
-      <div class="step"><span class="sn"></span><div><h3>Health check first</h3><p>Fault codes read and the engine looked over before anything is touched. A remap leans on an existing fault rather than hiding it, so if something needs sorting you'll know now — not after.</p></div></div>
-      <div class="step"><span class="sn"></span><div><h3>Your original file is saved</h3><p>The factory software is read off and archived against your registration. That's your guarantee the car can go back to standard whenever you want it to.</p></div></div>
-      <div class="step"><span class="sn"></span><div><h3>The new file is written</h3><p>Built around your engine, its mileage and its condition, with the manufacturer's safety margins left where they are. Then loaded onto the car.</p></div></div>
-      <div class="step"><span class="sn"></span><div><h3>Road tested and logged again</h3><p>Driven and measured a second time. If the numbers coming back off the car disagree with the file, the file changes — not the other way round.</p></div></div>
+    <div class="steps jobsheet rv" id="jobsheet">
+      <div class="step"><span class="jt mono">00:00</span><span class="jchk" aria-hidden="true"></span><div><h3>Health check first</h3><p>Fault codes read and the engine looked over before anything is touched. A remap leans on an existing fault rather than hiding it, so if something needs sorting you'll know now — not after.</p></div></div>
+      <div class="step"><span class="jt mono">00:20</span><span class="jchk" aria-hidden="true"></span><div><h3>Your original file is saved</h3><p>The factory software is read off and archived against your registration. That's your guarantee the car can go back to standard whenever you want it to.</p></div></div>
+      <div class="step"><span class="jt mono">01:30</span><span class="jchk" aria-hidden="true"></span><div><h3>The new file is written</h3><p>Built around your engine, its mileage and its condition, with the manufacturer's safety margins left where they are. Then loaded onto the car.</p></div></div>
+      <div class="step"><span class="jt mono">03:30</span><span class="jchk" aria-hidden="true"></span><div><h3>Road tested and logged again</h3><p>Driven and measured a second time. If the numbers coming back off the car disagree with the file, the file changes — not the other way round.</p></div></div>
     </div>
     </div>
   </div>
 </div>
 
-<hr class="hr">
-
-<!-- refusals -->
-<div class="sec">
+<!-- refusals: the moral centrepiece, on dark -->
+<div class="sec dark refsec">
   <div class="wrap two lead">
     <div class="rv">
       <span class="kicker">Work we turn down</span>
       <h2>What we won't do</h2>
       <p class="lede" style="margin-top:16px;">Plenty of places within twenty miles will do every one of these. We'd rather lose the booking than hand back a vehicle that fails an MOT, voids a policy, or eats a clutch by Christmas.</p>
-      <div class="btns" style="margin-top:26px;"><a class="btn solidpad o" href="/book">Ask us about your vehicle</a></div>
+      <div class="btns" style="margin-top:26px;"><a class="btn solidpad w" href="/book">Ask us about your vehicle</a></div>
     </div>
     <div class="refs rv">
       <div class="ref"><span class="no">✕</span><div><h4>Emissions equipment deletes</h4><p>No DPF, EGR or AdBlue removal on anything used on a road. It's an MOT failure, it isn't road legal, and it takes a chunk out of what the vehicle is worth.</p></div></div>
@@ -147,23 +197,16 @@
   </div>
 </div>
 
-<hr class="hr">
-
-<!-- heritage -->
-<div class="sec">
-  <div class="wrap mrow flip rv">
-    <div class="img" data-img="heritage" style="--ar:78%"></div>
-    <div>
-      <span class="kicker">Three generations</span>
-      <h2>My grandfather never touched a laptop in his life</h2>
-      <p class="lede" style="margin-top:16px;">He could tell you what was wrong with an engine from the far side of a workshop, and he had no patience at all for anyone who couldn't explain their own work.</p>
-      <p class="sub" style="margin-top:16px;font-size:.98rem;">The tools have changed completely since then. The test he applied to a job hasn't changed at all — and it's the reason the list above exists.</p>
-      <div class="btns" style="margin-top:26px;"><a class="btn o" href="/about">Read our story <span class="ar">→</span></a></div>
-    </div>
+<!-- heritage: a grain interlude, not a chapter -->
+<div class="heritage-band">
+  <div class="img" data-img="heritage"></div>
+  <div class="hb-ov"></div>
+  <div class="wrap hb-in rv">
+    <blockquote class="quote">"If you can't explain what you changed and why you changed it, you had no business touching it."</blockquote>
+    <p class="qa">— The rule this workshop has run on for three generations</p>
+    <a class="btn o hb-btn" href="/about">Read our story <span class="ar">→</span></a>
   </div>
 </div>
-
-<hr class="hr">
 
 <!-- reviews -->
 <div class="sec">
@@ -173,14 +216,14 @@
       <h2>Rated 5.0 by the people who've had it done</h2>
       <p class="lede" style="margin-top:16px;">Over a thousand vehicles tuned and a perfect rating from the customers who left one. Nearly all of our work still arrives by word of mouth, which is the review that actually counts for anything.</p>
       <div class="btns" style="margin-top:26px;">
-        <a class="btn o" href="/book">Book your vehicle in <span class="ar">&#8594;</span></a>
+        <a class="btn o" href="/book">Book your vehicle in <span class="ar">→</span></a>
       </div>
     </div>
     <div class="rv">
       <div class="ratepanel">
         <div class="rateno">
           <b>5.0</b>
-          <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          <span class="stars">★★★★★</span>
           <em>Customer rating</em>
         </div>
         <div class="ratebits">
@@ -214,16 +257,20 @@
   </div>
 </div>
 
-<!-- cta -->
-<div class="sec sm" style="background:var(--card);border-top:1px solid var(--line);">
-  <div class="wrap two lead rv" style="align-items:center;">
-    <div>
-      <h2>Not sure which one you need?</h2>
-      <p class="lede" style="margin-top:14px;">Tell us the vehicle and what you want out of it. If a remap isn't the right answer, that's what you'll be told.</p>
-    </div>
-    <div class="btns">
-      <a class="btn p lg" href="/book">Book a slot <span class="ar">→</span></a>
-      <a class="btn solidpad o lg" href="/what-is-remapping">What's involved?</a>
-    </div>
+<!-- the plate returns: the page closes on the gesture it opened with -->
+<div class="sec dark reprise">
+  <div class="wrap rp-in rv">
+    <span class="kicker">One more look</span>
+    <h2>Still wondering about yours?</h2>
+    <form id="regform3" class="regwrap rp-form" novalidate>
+      <div class="plate">
+        <span class="gbb" aria-hidden="true"><span class="st">★</span><b>UK</b></span>
+        <input id="reg3" type="text" maxlength="9" placeholder="YOUR REG" aria-label="Enter your registration" autocomplete="off" spellcheck="false">
+      </div>
+      <div class="btns" style="justify-content:center;margin-top:16px;">
+        <button type="submit" class="btn p">Check my vehicle <span class="ar">→</span></button>
+        <a class="btn solidpad w" href="/book">Or just book a slot</a>
+      </div>
+    </form>
   </div>
 </div>

@@ -26,6 +26,8 @@ assets/
   js/data.js         vehicle and marque data
   js/site.js         nav, scroll reveals, placeholder images
   js/reg-lookup.js   the registration lookup
+  js/home.js         home-page behaviours: counters, the headroom
+                     curve, job-sheet ticks, the plate reprise
   js/booking.js      the booking enquiry form
 ```
 

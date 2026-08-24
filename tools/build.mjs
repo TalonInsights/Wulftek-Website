@@ -27,7 +27,7 @@ const PAGES = [
     key: "index", path: "/", out: "index.html", accent: "perf",
     title: "WulfTek Tuning — ECU remapping in Telford, Shropshire",
     desc: "Independent ECU remapping in Telford for cars, vans, tractors and plant. Enter your registration for an instant idea of what your vehicle could do.",
-    scripts: ["data.js", "reg-lookup.js"], schema: ["business", "faq"], hero: true
+    scripts: ["data.js", "reg-lookup.js", "home.js"], schema: ["business", "faq"], hero: true
   },
   {
     key: "what-is-remapping", path: "/what-is-remapping", out: "what-is-remapping.html", accent: "perf",
