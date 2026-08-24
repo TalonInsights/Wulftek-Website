@@ -26,7 +26,7 @@ const PAGES = [
     key: "index", path: "/", out: "index.html", accent: "perf",
     title: "WulfTek Tuning — ECU remapping in Telford, Shropshire",
     desc: "Independent ECU remapping in Telford for cars, vans, tractors and plant. Enter your registration for an instant idea of what your vehicle could do.",
-    scripts: ["data.js", "reg-lookup.js"], schema: ["business", "faq"]
+    scripts: ["data.js", "reg-lookup.js"], schema: ["business", "faq"], hero: true
   },
   {
     key: "what-is-remapping", path: "/what-is-remapping", out: "what-is-remapping.html", accent: "perf",
@@ -135,7 +135,7 @@ const header = read("src", "partials", "header.html");
 const footer = read("src", "partials", "footer.html");
 const { MARQUE } = loadData();
 
-function render({ key, path, accent, title, desc, scripts = [], schema = [], body, depth = 0 }) {
+function render({ key, path, accent, title, desc, scripts = [], schema = [], body, hero = false }) {
   const js = ["config.js", "site.js", ...scripts]
     .map((f) => `<script src="/assets/js/${f}" defer></script>`).join("\n");
   const head = schema
@@ -148,6 +148,7 @@ function render({ key, path, accent, title, desc, scripts = [], schema = [], bod
     .replace(/\{\{PATH\}\}/g, path)
     .replace(/\{\{ACCENT\}\}/g, accent)
     .replace(/\{\{KEY\}\}/g, key)
+    .replace(/\{\{BODYCLASS\}\}/g, hero ? "has-hero" : "")
     .replace(/\{\{HEAD\}\}/g, head)
     .replace(/\{\{HEADER\}\}/g, markNav(header, key))
     .replace(/\{\{CONTENT\}\}/g, body)

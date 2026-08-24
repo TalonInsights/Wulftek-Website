@@ -28,6 +28,7 @@
   --body:"IBM Plex Sans",system-ui,sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,monospace;
 
+  --hdr:72px;          /* header bar height — the hero offsets key off this */
   --wrap:1200px;
   --gut:clamp(20px,5vw,44px);
   --pad:clamp(56px,7.5vw,104px);
@@ -81,7 +82,7 @@ p{margin:0 0 1.05em;} p:last-child{margin-bottom:0;}
 header{position:sticky;top:0;z-index:80;background:rgba(241,240,236,.88);
   backdrop-filter:blur(16px);border-bottom:1px solid transparent;transition:border-color .25s,box-shadow .25s;}
 header.stuck{border-bottom-color:var(--line);box-shadow:0 1px 12px rgba(20,22,26,.05);}
-.bar{display:flex;align-items:center;gap:16px;height:72px;}
+.bar{display:flex;align-items:center;gap:16px;height:var(--hdr);}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;flex:none;}
 .logo{display:block;height:34px;width:auto;}
 .logo.lg{height:46px;}
@@ -522,9 +523,9 @@ footer p{color:#8B929C;font-size:.88rem;}
 }
 @media(max-width:980px){
   .bg{display:block;}
-  nav.nv{position:fixed;inset:72px 0 auto 0;margin:0;flex-direction:column;align-items:stretch;gap:0;
+  nav.nv{position:fixed;inset:var(--hdr) 0 auto 0;margin:0;flex-direction:column;align-items:stretch;gap:0;
     background:var(--card);border-bottom:1px solid var(--line);padding:10px var(--gut) 24px;
-    max-height:calc(100vh - 72px);overflow:auto;transform:translateY(-10px);opacity:0;visibility:hidden;
+    max-height:calc(100vh - var(--hdr));overflow:auto;transform:translateY(-10px);opacity:0;visibility:hidden;
     transition:.22s var(--ease);box-shadow:var(--sh-lg);}
   body.nav nav.nv{transform:none;opacity:1;visibility:visible;}
   nav.nv a,nav.nv button{padding:14px 6px;text-align:left;width:100%;}
@@ -545,6 +546,58 @@ footer p{color:#8B929C;font-size:.88rem;}
   .bkbar button{font-size:.75rem;padding:13px 4px;}
   .tbl th:nth-child(3),.tbl td:nth-child(3){display:none;}
 }
+/* ==========================================================
+   FLOATING HEADER — pages carrying a hero photograph
+   The photo runs to the very top of the window and the header
+   sits over it with no bar of its own. Once you scroll past the
+   hero the header takes the solid bar back, because everything
+   below is light and the nav has to stay readable there too.
+   ========================================================== */
+.logo-light{display:none;}
+
+body.has-hero .hero{
+  margin-top:calc(var(--hdr) * -1);
+  padding-top:calc(clamp(64px,10vw,132px) + var(--hdr));
+}
+
+/* a scrim across the top of the photo so the nav never has to
+   fight whatever happens to be behind it */
+body.has-hero .hero::before{
+  content:"";position:absolute;left:0;right:0;top:0;height:210px;z-index:-1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(8,11,16,.66) 0%,rgba(8,11,16,.30) 55%,rgba(8,11,16,0) 100%);
+}
+
+/* --- floating state: over the photo, not yet scrolled, menu closed --- */
+body.has-hero:not(.nav) header:not(.stuck){
+  background:transparent;backdrop-filter:none;box-shadow:none;border-bottom-color:transparent;
+}
+body.has-hero:not(.nav) header:not(.stuck) .logo-dark{display:none;}
+body.has-hero:not(.nav) header:not(.stuck) .logo-light{display:block;}
+body.has-hero:not(.nav) header:not(.stuck) .bg{border-color:rgba(255,255,255,.5);}
+body.has-hero:not(.nav) header:not(.stuck) .bg i{background:#fff;}
+/* opening the mobile menu brings the solid bar back, so the burger has to go
+   dark again with it — stated explicitly rather than left to the cascade */
+body.has-hero.nav .bg{border-color:var(--line);}
+body.has-hero.nav .bg i{background:var(--ink);}
+
+/* Light nav treatment only above the burger breakpoint. Below it the open
+   menu is a white panel, where white-on-white links would vanish. */
+@media(min-width:981px){
+  body.has-hero:not(.nav) header:not(.stuck) nav.nv>a,
+  body.has-hero:not(.nav) header:not(.stuck) .dd>button{color:rgba(255,255,255,.88);}
+  body.has-hero:not(.nav) header:not(.stuck) nav.nv>a:hover,
+  body.has-hero:not(.nav) header:not(.stuck) .dd>button:hover{color:#fff;background:rgba(255,255,255,.16);}
+  body.has-hero:not(.nav) header:not(.stuck) nav.nv>a.on,
+  body.has-hero:not(.nav) header:not(.stuck) .dd>button.on{color:#fff;}
+  /* the booking CTA has to stay the brightest control in the bar */
+  body.has-hero:not(.nav) header:not(.stuck) .cta-nav{
+    background:#fff!important;color:var(--ink)!important;
+    box-shadow:0 1px 0 rgba(255,255,255,.4) inset,0 6px 18px -6px rgba(0,0,0,.6);}
+  body.has-hero:not(.nav) header:not(.stuck) .cta-nav:hover{
+    background:#fff!important;transform:translateY(-1px);
+    box-shadow:0 1px 0 rgba(255,255,255,.5) inset,0 12px 24px -8px rgba(0,0,0,.7);}
+}
+
 @media(prefers-reduced-motion:reduce){
   *{animation-duration:.01ms!important;transition-duration:.01ms!important;}
   html{scroll-behavior:auto;} .rv{opacity:1;transform:none;}

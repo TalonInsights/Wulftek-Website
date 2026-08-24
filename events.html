@@ -26,12 +26,15 @@
 
 <script>document.documentElement.className=document.documentElement.className.replace(/\bno-js\b/,"js");</script>
 </head>
-<body data-accent="perf" data-page="events">
+<body class="" data-accent="perf" data-page="events">
 <a class="skip" href="#main">Skip to content</a>
 <header id="hdr">
   <div class="wrap bar">
     <a class="brand" href="/" aria-label="WulfTek Tuning — home">
-      <img class="logo" src="/assets/img/logo-wordmark.png" width="944" height="200" alt="WulfTek Tuning &amp; Performance">
+      <!-- the light variant is swapped in while the header floats over the hero photo;
+           the link carries its own aria-label, so both images stay decorative -->
+      <img class="logo logo-dark" src="/assets/img/logo-wordmark.png" width="944" height="200" alt="">
+      <img class="logo logo-light" src="/assets/img/logo-wordmark-light.png" width="944" height="200" alt="">
     </a>
     <button class="bg" id="bg" aria-label="Menu" aria-expanded="false" aria-controls="nv"><i></i><i></i><i></i></button>
     <nav class="nv" id="nv" aria-label="Main">
@@ -98,7 +101,7 @@
     <div class="fg">
       <div>
         <a class="brand" href="/" style="margin-bottom:18px;" aria-label="WulfTek Tuning — home">
-          <img class="logo lg" src="/assets/img/logo-wordmark.png" width="944" height="200" alt="WulfTek Tuning &amp; Performance">
+          <img class="logo lg" src="/assets/img/logo-wordmark-light.png" width="944" height="200" alt="">
         </a>
         <p style="max-width:34ch;">Independent ECU remapping and calibration in Telford, Shropshire. Cars, commercial vehicles and agricultural machinery.</p>
       </div>
