@@ -43,6 +43,13 @@ That rewrites all 25 pages plus `sitemap.xml`. Adding a make to `WT.MARQUE` in
 `vercel.json` sets `cleanUrls`, so `/about` serves `about.html` — keep links
 extensionless.
 
+The build stamps CSS and JS URLs with a hash of their contents
+(`site.css?v=dd67d8e1`). That is what makes it safe to cache them for a year:
+change a file and its URL changes with it, so nobody is left running an old
+stylesheet against new markup. Images aren't hashed and are cached for a day,
+so a replaced photo under the same filename takes up to a day to appear —
+give it a new filename if you need it live immediately.
+
 ## Placeholders still to fill before launch
 
 - **Contact details** — `WT.CONTACT` in `assets/js/config.js` is empty, so the
