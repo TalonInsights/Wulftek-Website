@@ -72,6 +72,8 @@ p{margin:0 0 1.05em;} p:last-child{margin-bottom:0;}
 .hr{border:0;height:1px;background:var(--line);margin:0;}
 .head{max-width:66ch;margin-bottom:clamp(30px,3.6vw,48px);}
 .head .lede{margin-top:16px;}
+.head.ctr{text-align:center;margin-inline:auto;}
+.head.ctr .lede{margin-inline:auto;}
 .grid{display:grid;gap:clamp(16px,1.8vw,24px);}
 .g2{grid-template-columns:repeat(2,1fr);} .g3{grid-template-columns:repeat(3,1fr);}
 .g4{grid-template-columns:repeat(4,1fr);}
@@ -410,6 +412,7 @@ label.fld>span{display:block;font-family:var(--mono);font-size:.63rem;letter-spa
 
 /* ---------- faq ---------- */
 .faq{border-top:1px solid var(--line);}
+.faqc{max-width:760px;margin-inline:auto;}
 .faq details{border-bottom:1px solid var(--line);}
 .faq summary{padding:21px 0;cursor:pointer;list-style:none;display:flex;justify-content:space-between;
   gap:22px;font-weight:600;font-size:1.03rem;align-items:center;}
