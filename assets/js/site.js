@@ -74,13 +74,17 @@
   }
   paintImages();
 
-  /* ---------------- scroll reveals ---------------- */
+  /* ---------------- scroll reveals ----------------
+     Reveals REPLAY: the class comes off once an element has fully
+     left the viewport, so scrolling back re-runs its animation.
+     The reveal fires early (top edge near the viewport) but the
+     reset only once truly gone, so nothing flickers at the edge. */
   var io = ("IntersectionObserver" in window)
     ? new IntersectionObserver(function (entries) {
         entries.forEach(function (en) {
-          if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
+          en.target.classList.toggle("in", en.isIntersecting);
         });
-      }, { threshold: 0.08, rootMargin: "0px 0px -6% 0px" })
+      }, { threshold: 0, rootMargin: "0px 0px -6% 0px" })
     : null;
 
   var items = document.querySelectorAll(".rv");

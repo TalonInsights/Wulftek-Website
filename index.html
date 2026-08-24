@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/site.css?v=dfaedb0e">
+<link rel="stylesheet" href="/assets/css/site.css?v=2589550d">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"AutoRepair","name":"WulfTek Tuning","description":"Independent ECU remapping and calibration for cars, vans, tractors and plant machinery.","url":"https://wulftek-website.vercel.app","priceRange":"££","image":"https://wulftek-website.vercel.app/assets/img/hero-workshop.jpg","address":{"@type":"PostalAddress","streetAddress":"[STREET]","addressLocality":"Telford","addressRegion":"Shropshire","postalCode":"[POSTCODE]","addressCountry":"GB"},"areaServed":["Telford","Shrewsbury","Wolverhampton","Stafford","Shropshire","West Midlands"],"makesOffer":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Performance ECU remapping"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Economy ECU remapping"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Agricultural and plant ECU remapping"}}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is remapping legal in the UK?","acceptedAnswer":{"@type":"Answer","text":"Yes. Remapping is legal. You must declare it to your insurer, and we provide the details in writing. Removing emissions equipment is not legal for road use, which is why we do not do it."}},{"@type":"Question","name":"Can a remap be reversed?","acceptedAnswer":{"@type":"Answer","text":"Yes. The original factory file is read off and archived against your registration before anything is changed, so the vehicle can be returned to standard at any time."}},{"@type":"Question","name":"Will a remap affect my insurance?","acceptedAnswer":{"@type":"Answer","text":"It must be declared. A remap is a modification like any other and an undeclared one can invalidate a claim."}},{"@type":"Question","name":"Does anything get removed from the engine?","acceptedAnswer":{"@type":"Answer","text":"No. On a standard remap no parts are removed or replaced. The software is read out, rewritten and written back."}}]}</script>
 <script>document.documentElement.className=document.documentElement.className.replace(/\bno-js\b/,"js");</script>
@@ -176,84 +176,91 @@
 
 <hr class="hr">
 
-<!-- three services: the triptych -->
-<div class="sec">
+<!-- three services: full-bleed panels, one per file -->
+<div class="sec svc">
   <div class="wrap">
     <div class="head rv">
       <span class="kicker">What we do</span>
       <h2>Three jobs, three different files</h2>
       <p class="lede">A farmer pulling a plough all day and a hot hatch on a B-road want opposite things from the same engine. Most places write one file and sell it three ways. We don't.</p>
     </div>
-    <div class="triptych rv">
-      <a class="disc c1" href="/performance">
-        <div class="img" data-img="road"></div><div class="dbar"></div>
-        <div class="din">
-          <span class="dk">Performance</span>
-          <h3>More power, sharper response</h3>
-          <p>Stronger pull for overtaking, towing and hills — built through the rev range you actually drive in, not just at the top.</p>
-          <span class="dgo">See performance <span class="ar">→</span></span>
-        </div>
-      </a>
-      <a class="disc c2" href="/economy">
-        <div class="img" data-img="van"></div><div class="dbar"></div>
-        <div class="din">
-          <span class="dk">Economy</span>
-          <h3>Fewer stops at the pump</h3>
-          <p>More torque low down, so the engine does the same work in a taller gear at lower revs. For people whose mileage costs them money.</p>
-          <span class="dgo">See economy <span class="ar">→</span></span>
-        </div>
-      </a>
-      <a class="disc c3" href="/agricultural">
-        <div class="img" data-img="field"></div><div class="dbar"></div>
-        <div class="din">
-          <span class="dk">Agricultural</span>
-          <h3>Tractors and plant</h3>
-          <p>Torque that holds through a long day, steadier PTO work, and fewer trips back to the yard for fuel.</p>
-          <span class="dgo">See agricultural <span class="ar">→</span></span>
-        </div>
-      </a>
-    </div>
+  </div>
+  <div class="panels rv">
+    <a class="panel c1" href="/performance">
+      <div class="img" data-img="road"></div>
+      <div class="pov"></div>
+      <div class="pin">
+        <span class="pnum mono">File 01</span>
+        <h3>Performance</h3>
+        <p class="psub">More power, sharper response</p>
+        <p class="pcopy">Stronger pull for overtaking, towing and hills — built through the rev range you actually drive in, not just at the top.</p>
+        <span class="pgo">See performance <span class="ar">→</span></span>
+      </div>
+    </a>
+    <a class="panel c2" href="/economy">
+      <div class="img" data-img="van"></div>
+      <div class="pov"></div>
+      <div class="pin">
+        <span class="pnum mono">File 02</span>
+        <h3>Economy</h3>
+        <p class="psub">Fewer stops at the pump</p>
+        <p class="pcopy">More torque low down, so the engine does the same work in a taller gear at lower revs. For people whose mileage costs them money.</p>
+        <span class="pgo">See economy <span class="ar">→</span></span>
+      </div>
+    </a>
+    <a class="panel c3" href="/agricultural">
+      <div class="img" data-img="field"></div>
+      <div class="pov"></div>
+      <div class="pin">
+        <span class="pnum mono">File 03</span>
+        <h3>Agricultural</h3>
+        <p class="psub">Tractors and plant</p>
+        <p class="pcopy">Torque that holds through a long day, steadier PTO work, and fewer trips back to the yard for fuel.</p>
+        <span class="pgo">See agricultural <span class="ar">→</span></span>
+      </div>
+    </a>
   </div>
 </div>
 
 <hr class="hr">
 
-<!-- the job sheet -->
-<div class="sec">
+<!-- how it works: the four-hour line -->
+<div class="sec" id="process">
   <div class="wrap">
-    <div class="two lead">
-    <div class="rv" style="position:sticky;top:100px;">
+    <div class="head rv">
       <span class="kicker">How it works</span>
       <h2>Four hours, roughly</h2>
-      <p class="lede" style="margin-top:16px;">Nothing here is rushed and nothing is skipped. If a step throws up a problem, you hear about it before we carry on.</p>
-      <div class="btns" style="margin-top:26px;"><a class="btn o" href="/what-is-remapping">What is a remap? <span class="ar">→</span></a></div>
+      <p class="lede">Nothing here is rushed and nothing is skipped. If a step throws up a problem, you hear about it before we carry on.</p>
     </div>
-    <div class="steps jobsheet rv" id="jobsheet">
-      <div class="step"><span class="jt mono">00:00</span><span class="jchk" aria-hidden="true"></span><div><h3>Health check first</h3><p>Fault codes read and the engine looked over before anything is touched. A remap leans on an existing fault rather than hiding it, so if something needs sorting you'll know now — not after.</p></div></div>
-      <div class="step"><span class="jt mono">00:20</span><span class="jchk" aria-hidden="true"></span><div><h3>Your original file is saved</h3><p>The factory software is read off and archived against your registration. That's your guarantee the car can go back to standard whenever you want it to.</p></div></div>
-      <div class="step"><span class="jt mono">01:30</span><span class="jchk" aria-hidden="true"></span><div><h3>The new file is written</h3><p>Built around your engine, its mileage and its condition, with the manufacturer's safety margins left where they are. Then loaded onto the car.</p></div></div>
-      <div class="step"><span class="jt mono">03:30</span><span class="jchk" aria-hidden="true"></span><div><h3>Road tested and logged again</h3><p>Driven and measured a second time. If the numbers coming back off the car disagree with the file, the file changes — not the other way round.</p></div></div>
+    <div class="tline4 rv" id="timeline" aria-label="The four steps of a remap, along the four hours they take">
+      <div class="ttrack" aria-hidden="true"><i id="tprog"></i></div>
+      <ol class="tstops">
+        <li><span class="tnode" aria-hidden="true"></span><span class="tt num">00:00</span><h3>Health check first</h3><p>Fault codes read and the engine looked over before anything is touched. A remap leans on an existing fault rather than hiding it — if something needs sorting you'll know now, not after.</p></li>
+        <li><span class="tnode" aria-hidden="true"></span><span class="tt num">00:20</span><h3>Your original file is saved</h3><p>The factory software is read off and archived against your registration. That's your guarantee the car can go back to standard whenever you want it to.</p></li>
+        <li><span class="tnode" aria-hidden="true"></span><span class="tt num">01:30</span><h3>The new file is written</h3><p>Built around your engine, its mileage and its condition, with the manufacturer's safety margins left where they are. Then loaded onto the car.</p></li>
+        <li><span class="tnode" aria-hidden="true"></span><span class="tt num">03:30</span><h3>Road tested and logged again</h3><p>Driven and measured a second time. If the numbers coming back off the car disagree with the file, the file changes — not the other way round.</p></li>
+      </ol>
     </div>
-    </div>
+    <div class="btns rv" style="margin-top:clamp(28px,3.4vw,44px);"><a class="btn o" href="/what-is-remapping">What is a remap? <span class="ar">→</span></a></div>
   </div>
 </div>
 
-<!-- refusals: the moral centrepiece, on dark -->
-<div class="sec dark refsec">
-  <div class="wrap two lead">
-    <div class="rv">
+<!-- refusals: the manifesto — each job crossed off as it enters view -->
+<div class="sec dark manifesto">
+  <div class="wrap">
+    <div class="head mfhead rv">
       <span class="kicker">Work we turn down</span>
       <h2>What we won't do</h2>
-      <p class="lede" style="margin-top:16px;">Plenty of places within twenty miles will do every one of these. We'd rather lose the booking than hand back a vehicle that fails an MOT, voids a policy, or eats a clutch by Christmas.</p>
-      <div class="btns" style="margin-top:26px;"><a class="btn solidpad w" href="/book">Ask us about your vehicle</a></div>
+      <p class="lede">Plenty of places within twenty miles will do every one of these. We'd rather lose the booking than hand back a vehicle that fails an MOT, voids a policy, or eats a clutch by Christmas.</p>
     </div>
-    <div class="refs rv">
-      <div class="ref"><span class="no">✕</span><div><h4>Emissions equipment deletes</h4><p>No DPF, EGR or AdBlue removal on anything used on a road. It's an MOT failure, it isn't road legal, and it takes a chunk out of what the vehicle is worth.</p></div></div>
-      <div class="ref"><span class="no">✕</span><div><h4>Power the drivetrain can't hold</h4><p>If the clutch, gearbox or turbo won't live with the figure you've read about online, you'll hear that before you book.</p></div></div>
-      <div class="ref"><span class="no">✕</span><div><h4>Mapping over an existing fault</h4><p>Stored codes, a boost leak or a tired clutch get fixed first — by us or by whoever you like.</p></div></div>
-      <div class="ref"><span class="no">✕</span><div><h4>Telling you to keep quiet to your insurer</h4><p>Declare it. You'll get the details in writing so you can forward them straight on.</p></div></div>
-      <div class="ref"><span class="no">✕</span><div><h4>Handing it back unchecked</h4><p>Nothing leaves without a road test and a second set of logs, however late that makes the day.</p></div></div>
+    <div class="mf">
+      <div class="mfi rv"><h3 class="strike"><span>DPF, EGR and AdBlue deletes</span></h3><p>An MOT failure, not road legal, and it takes a chunk out of what the vehicle is worth. Not on anything used on a road.</p></div>
+      <div class="mfi rv"><h3 class="strike"><span>Power your drivetrain can't hold</span></h3><p>If the clutch, gearbox or turbo won't live with the figure you've read about online, you'll hear that before you book.</p></div>
+      <div class="mfi rv"><h3 class="strike"><span>Mapping over an existing fault</span></h3><p>Stored codes, a boost leak or a tired clutch get fixed first — by us or by whoever you like.</p></div>
+      <div class="mfi rv"><h3 class="strike"><span>"Just don't tell your insurer"</span></h3><p>Declare it. You'll get the details in writing so you can forward them straight on.</p></div>
+      <div class="mfi rv"><h3 class="strike"><span>Handing it back unchecked</span></h3><p>Nothing leaves without a road test and a second set of logs, however late that makes the day.</p></div>
     </div>
+    <div class="btns rv" style="justify-content:center;margin-top:clamp(30px,4vw,48px);"><a class="btn solidpad w" href="/book">Ask us about your vehicle</a></div>
   </div>
 </div>
 
@@ -373,9 +380,9 @@
 </footer>
 
 <script src="/assets/js/config.js?v=3bf6ce07" defer></script>
-<script src="/assets/js/site.js?v=a83d483c" defer></script>
+<script src="/assets/js/site.js?v=470e1be9" defer></script>
 <script src="/assets/js/data.js?v=e693735a" defer></script>
 <script src="/assets/js/reg-lookup.js?v=a0e787c7" defer></script>
-<script src="/assets/js/home.js?v=e7fd7201" defer></script>
+<script src="/assets/js/home.js?v=01dc096c" defer></script>
 </body>
 </html>

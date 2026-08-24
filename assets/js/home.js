@@ -1,45 +1,58 @@
 /* ============================================================
    WULFTEK — HOME PAGE BEHAVIOURS ("The Calibration")
-   Counters, the headroom curve, the job-sheet ticks, the hero
-   plate's cycling placeholder and the closing plate reprise.
-   Everything fires once, and prefers-reduced-motion gets the
-   finished state with no animation at all.
+   Counters, the headroom curve, the hero plate's cycling
+   placeholder and the closing plate reprise.
+
+   Animations REPLAY: each one resets when its element leaves the
+   viewport and runs again on re-entry. The four-hour line and the
+   manifesto strikes are pure CSS, driven by the .rv/.in toggling
+   in site.js. prefers-reduced-motion gets finished states only.
    ============================================================ */
 (function () {
   "use strict";
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var io = "IntersectionObserver" in window;
 
-  function once(el, fn, threshold) {
+  /* enter() runs on every arrival in the viewport, exit() on every
+     full departure — so a play/reset pair replays forever */
+  function onView(el, enter, exit, threshold) {
     if (!el) return;
-    if (!io || reduced) { fn(); return; }
+    if (!io || reduced) { enter(); return; }
     var o = new IntersectionObserver(function (es) {
       es.forEach(function (en) {
-        if (en.isIntersecting) { o.disconnect(); fn(); }
+        if (en.isIntersecting) enter();
+        else if (exit) exit();
       });
-    }, { threshold: threshold || 0.4 });
+    }, { threshold: threshold || 0.35 });
     o.observe(el);
   }
 
   /* ---------------- readout counters ---------------- */
-  var counters = document.querySelectorAll("[data-count]");
-  Array.prototype.forEach.call(counters, function (el) {
+  Array.prototype.forEach.call(document.querySelectorAll("[data-count]"), function (el) {
     var target = parseFloat(el.getAttribute("data-count"));
     var decimals = parseInt(el.getAttribute("data-decimals") || "0", 10);
     var suffix = el.getAttribute("data-suffix") || "";
     var final = target.toFixed(decimals) + suffix;
-    once(el, function () {
+    var raf = null;
+
+    function play() {
       if (reduced || target === 0) { el.textContent = final; return; }
+      if (raf) cancelAnimationFrame(raf);
       var t0 = null, DUR = 1100;
       function tick(t) {
         if (!t0) t0 = t;
         var p = Math.min((t - t0) / DUR, 1);
         var eased = 1 - Math.pow(1 - p, 3);
         el.textContent = (target * eased).toFixed(decimals) + (p === 1 ? suffix : "");
-        if (p < 1) requestAnimationFrame(tick);
+        if (p < 1) raf = requestAnimationFrame(tick); else raf = null;
       }
-      requestAnimationFrame(tick);
-    }, 0.6);
+      raf = requestAnimationFrame(tick);
+    }
+    function reset() {
+      if (raf) { cancelAnimationFrame(raf); raf = null; }
+      el.textContent = (0).toFixed(decimals);
+    }
+    onView(el, play, reset, 0.6);
   });
 
   /* ---------------- the headroom curve ---------------- */
@@ -66,7 +79,6 @@
 
   var stage = document.getElementById("cvstage");
   if (stage) {
-    var svg = document.getElementById("cvsvg");
     var lineF = document.getElementById("cvf"), lineR = document.getElementById("cvr");
     var gap = document.getElementById("cvgap"), gapLabel = document.getElementById("cvgaplabel");
     var annos = document.getElementById("annos");
@@ -75,31 +87,42 @@
     var rdotf = document.getElementById("rdotf"), rdotr = document.getElementById("rdotr");
     var read = document.getElementById("cvread");
 
-    /* draw-on-scroll: factory first, then the remap, then the gap floods in */
+    /* draw on every arrival: factory first, then the remap, then
+       the gap floods in; reset instantly once fully out of view */
     if (!reduced && lineF.getTotalLength) {
-      [lineF, lineR].forEach(function (p) {
-        var L = p.getTotalLength();
-        p.style.strokeDasharray = L;
-        p.style.strokeDashoffset = L;
-      });
-      gap.style.opacity = "0";
-      annos.style.opacity = "0";
-      gapLabel.style.opacity = "0";
-
-      once(stage, function () {
-        lineF.style.transition = "stroke-dashoffset 1.1s cubic-bezier(.22,.61,.36,1)";
-        lineF.style.strokeDashoffset = "0";
-        setTimeout(function () {
-          lineR.style.transition = "stroke-dashoffset 1.2s cubic-bezier(.22,.61,.36,1)";
-          lineR.style.strokeDashoffset = "0";
-        }, 450);
-        setTimeout(function () {
-          [gap, gapLabel, annos].forEach(function (el) {
-            el.style.transition = "opacity .8s ease";
-            el.style.opacity = "1";
-          });
-        }, 1250);
-      }, 0.35);
+      var timers = [];
+      var cvReset = function () {
+        timers.forEach(clearTimeout); timers = [];
+        [lineF, lineR].forEach(function (p) {
+          var L = p.getTotalLength();
+          p.style.transition = "none";
+          p.style.strokeDasharray = L;
+          p.style.strokeDashoffset = L;
+        });
+        [gap, gapLabel, annos].forEach(function (el) {
+          el.style.transition = "none";
+          el.style.opacity = "0";
+        });
+      };
+      var cvPlay = function () {
+        /* two frames between reset and play so "transition:none" lands */
+        requestAnimationFrame(function () { requestAnimationFrame(function () {
+          lineF.style.transition = "stroke-dashoffset 1.1s cubic-bezier(.22,.61,.36,1)";
+          lineF.style.strokeDashoffset = "0";
+          timers.push(setTimeout(function () {
+            lineR.style.transition = "stroke-dashoffset 1.2s cubic-bezier(.22,.61,.36,1)";
+            lineR.style.strokeDashoffset = "0";
+          }, 450));
+          timers.push(setTimeout(function () {
+            [gap, gapLabel, annos].forEach(function (el) {
+              el.style.transition = "opacity .8s ease";
+              el.style.opacity = "1";
+            });
+          }, 1250));
+        }); });
+      };
+      cvReset();
+      onView(stage, cvPlay, cvReset, 0.35);
     }
 
     /* the reticle: run a fingertip (or cursor) along the rev range */
@@ -125,26 +148,6 @@
       reticle.style.opacity = "0";
       read.innerHTML = "move along the curve&nbsp;→";
     });
-  }
-
-  /* ---------------- job-sheet ticks ---------------- */
-  var steps = document.querySelectorAll("#jobsheet .step");
-  if (steps.length) {
-    if (!io || reduced) {
-      Array.prototype.forEach.call(steps, function (s) { s.classList.add("done"); });
-    } else {
-      var so = new IntersectionObserver(function (es) {
-        es.forEach(function (en) {
-          if (!en.isIntersecting) return;
-          var el = en.target;
-          so.unobserve(el);
-          /* stagger so a fast scroll still ticks them in order */
-          var idx = Array.prototype.indexOf.call(steps, el);
-          setTimeout(function () { el.classList.add("done"); }, idx * 140);
-        });
-      }, { threshold: 0.6 });
-      Array.prototype.forEach.call(steps, function (s) { so.observe(s); });
-    }
   }
 
   /* ---------------- hero plate: cycling placeholder ---------------- */

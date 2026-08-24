@@ -193,18 +193,7 @@ body.nav .bg i:nth-child(3){transform:translateY(-5px) rotate(-45deg);}
   display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-family:var(--mono);
   font-size:.78rem;font-weight:600;}
 
-/* discipline cards */
-.disc{display:block;text-decoration:none;background:var(--card);border:1px solid var(--line-2);
-  border-radius:var(--r);overflow:hidden;transition:.26s var(--ease);}
-.disc:hover{transform:translateY(-4px);box-shadow:var(--sh-lg);border-color:rgba(var(--dc-rgb),.4);}
-.disc .img{border-radius:0;--ar:56%;}
-.disc .dbar{height:3px;background:var(--dc);}
-.din{padding:clamp(20px,2.2vw,26px);}
-.dk{font-family:var(--mono);font-size:.65rem;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--dc);display:block;margin-bottom:10px;}
-.disc p{color:var(--ink-2);font-size:.94rem;margin:0 0 16px;}
-.dgo{font-size:.92rem;font-weight:600;color:var(--dc);display:inline-flex;gap:7px;}
-.disc:hover .dgo .ar{transform:translateX(3px);}
+/* discipline colours — red, green, amber, one per file */
 .c1{--dc:var(--red);--dc-rgb:var(--red-rgb);}
 .c2{--dc:var(--green);--dc-rgb:var(--green-rgb);}
 .c3{--dc:var(--amber);--dc-rgb:var(--amber-rgb);}
@@ -568,46 +557,111 @@ footer p{color:#8B929C;font-size:.88rem;}
    the resting states so nothing is hidden if the script never runs */
 .cvline,.cvgap,.anno,.cvgaplabel{opacity:1;}
 
-/* ---------- services triptych ---------- */
-.triptych{display:flex;gap:clamp(16px,1.8vw,24px);align-items:stretch;}
-.triptych .disc{flex:1 1 0;min-width:0;transition:flex-grow .45s var(--ease),transform .26s var(--ease),
-  box-shadow .26s var(--ease),border-color .26s var(--ease);}
-.triptych .disc .img{--ar:66%;}
-.triptych .disc .img img{filter:saturate(.55) contrast(.98);transition:filter .45s var(--ease);}
+/* ---------- services: full-bleed panels ---------- */
+.svc .head{margin-bottom:clamp(24px,3vw,38px);}
+.panels{display:flex;gap:12px;height:min(66vh,600px);
+  margin-inline:calc(50% - 50vw);padding-inline:clamp(12px,2vw,28px);}
+.panel{position:relative;flex:1 1 0;min-width:0;display:block;overflow:hidden;
+  border-radius:var(--r);text-decoration:none;color:#fff;isolation:isolate;
+  transition:flex-grow .6s var(--ease);}
+.panel .img{position:absolute;inset:0;border-radius:0;}
+.panel .img::before{display:none;}
+.panel .img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  filter:grayscale(.85) contrast(1.02);transform:scale(1.02);
+  transition:filter .6s var(--ease),transform .6s var(--ease);}
+/* each discipline's colour lives in the tint until the photo takes over */
+.pov{position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:
+    linear-gradient(180deg,rgba(8,11,16,.05) 30%,rgba(8,11,16,.88) 100%),
+    linear-gradient(180deg,rgba(var(--dc-rgb),.30),rgba(var(--dc-rgb),.30));
+  transition:opacity .6s var(--ease);}
+.panel::after{content:"";position:absolute;left:0;right:0;bottom:0;height:4px;
+  background:var(--dc);z-index:3;}
+.pin{position:absolute;inset:auto 0 0 0;z-index:2;padding:clamp(18px,2.2vw,30px);}
+.pnum{display:block;font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(255,255,255,.66);margin-bottom:10px;}
+.panel h3{color:#fff;font-size:clamp(1.3rem,2vw,1.8rem);font-weight:700;letter-spacing:-.025em;}
+.psub{color:rgba(255,255,255,.78);font-size:.95rem;margin:6px 0 0;}
+.pcopy{color:rgba(255,255,255,.85);font-size:.94rem;line-height:1.55;max-width:44ch;
+  max-height:0;opacity:0;overflow:hidden;margin:0;transform:translateY(8px);
+  transition:max-height .5s var(--ease),opacity .45s var(--ease) .08s,transform .5s var(--ease),margin .5s var(--ease);}
+.pgo{display:inline-flex;align-items:center;gap:8px;font-size:.92rem;font-weight:600;color:#fff;
+  max-height:0;opacity:0;overflow:hidden;transform:translateY(8px);
+  transition:max-height .5s var(--ease),opacity .45s var(--ease) .14s,transform .5s var(--ease),margin .5s var(--ease);}
+.pgo .ar{width:24px;height:24px;border-radius:50%;background:var(--dc);display:inline-flex;
+  align-items:center;justify-content:center;font-size:.8rem;}
 @media(hover:hover) and (min-width:981px){
-  .triptych .disc:hover{flex-grow:1.45;}
-  .triptych .disc:hover .img img{filter:none;}
+  .panel:hover,.panel:focus-visible{flex-grow:2.3;}
+  .panel:hover .img img,.panel:focus-visible .img img{filter:grayscale(0);transform:scale(1.06);}
+  .panel:hover .pov,.panel:focus-visible .pov{opacity:.75;}
+  .panel:hover .pcopy,.panel:focus-visible .pcopy{max-height:180px;opacity:1;transform:none;margin:12px 0 0;}
+  .panel:hover .pgo,.panel:focus-visible .pgo{max-height:40px;opacity:1;transform:none;margin-top:14px;}
 }
 @media(max-width:980px){
-  .triptych{flex-direction:column;}
-  .triptych .disc .img img{filter:none;}
+  .panels{flex-direction:column;height:auto;margin-inline:0;padding-inline:var(--gut);gap:14px;}
+  /* flex-basis would zero the height on the column axis, so opt out of flex sizing */
+  .panel{flex:0 0 auto;height:260px;}
+  .panel .img img{filter:grayscale(.3);}
+  .pcopy{display:none;}
+  .pgo{max-height:none;opacity:1;transform:none;margin-top:12px;}
 }
 
-/* ---------- the job sheet ---------- */
-.jobsheet .step{grid-template-columns:58px 30px 1fr;}
-.jt{font-size:.78rem;color:var(--ink-3);padding-top:5px;letter-spacing:.02em;
-  font-variant-numeric:tabular-nums;}
-.jchk{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--line);background:var(--card);
-  margin-top:3px;position:relative;flex:none;transition:border-color .3s var(--ease),background .3s var(--ease);}
-.jchk::after{content:"";position:absolute;left:6px;top:3px;width:5px;height:10px;
-  border-right:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(45deg) scale(0);
-  transition:transform .3s var(--ease) .1s;}
-.step.done .jchk{background:var(--green);border-color:var(--green);}
-.step.done .jchk::after{transform:rotate(45deg) scale(1);}
-@media(max-width:980px){.jobsheet .step{grid-template-columns:46px 26px 1fr;}}
+/* ---------- how it works: the four-hour line ---------- */
+.tline4{position:relative;margin-top:clamp(26px,3.4vw,46px);}
+.ttrack{position:absolute;top:6px;left:7px;right:7px;height:2px;background:var(--line);}
+#tprog{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--red);}
+.tline4.in #tprog{width:100%;transition:width 1.8s var(--ease) .1s;}
+.tline4:not(.in) #tprog{transition:none;}
+.tstops{list-style:none;margin:0;padding:0;display:grid;
+  grid-template-columns:repeat(4,1fr);gap:clamp(18px,2.4vw,32px);}
+.tstops li{position:relative;padding-top:38px;}
+.tnode{position:absolute;top:0;left:0;width:14px;height:14px;border-radius:50%;
+  background:var(--bg);border:2px solid var(--ink-3);}
+.tline4.in .tnode{background:var(--red);border-color:var(--red);
+  transition:background .25s,border-color .25s;}
+/* the stops light as the line reaches them */
+.tline4.in li:nth-child(1) .tnode{transition-delay:.15s;}
+.tline4.in li:nth-child(2) .tnode{transition-delay:.55s;}
+.tline4.in li:nth-child(3) .tnode{transition-delay:1s;}
+.tline4.in li:nth-child(4) .tnode{transition-delay:1.5s;}
+.tline4:not(.in) .tnode{transition:none;}
+.tt{display:block;font-size:clamp(1.35rem,2vw,1.8rem);color:var(--ink);margin-bottom:10px;}
+.tstops h3{margin-bottom:8px;}
+.tstops p{color:var(--ink-2);font-size:.93rem;margin:0;}
+.no-js #tprog{width:100%;} .no-js .tnode{background:var(--red);border-color:var(--red);}
+@media(max-width:900px){
+  .tstops{grid-template-columns:1fr;gap:34px;}
+  .ttrack{top:7px;bottom:7px;left:6px;right:auto;width:2px;height:auto;}
+  #tprog{width:100%;height:0;}
+  .tline4.in #tprog{width:100%;height:100%;transition:height 1.8s var(--ease) .1s;}
+  .tstops li{padding-top:0;padding-left:40px;}
+  .tnode{top:7px;}
+}
 
-/* ---------- dark sections (refusals, reprise) ---------- */
+/* ---------- dark sections (manifesto, reprise) ---------- */
 .sec.dark{background:var(--slate);color:#E8EAED;}
 .sec.dark h2,.sec.dark h3{color:#fff;}
 .sec.dark .lede,.sec.dark .sub{color:rgba(232,234,237,.72);}
-.sec.dark .refs .ref{border-bottom-color:rgba(255,255,255,.1);}
-.sec.dark .refs .ref:first-child{border-top-color:rgba(255,255,255,.1);}
-.sec.dark .ref h4{color:#fff;}
-.sec.dark .ref p{color:rgba(232,234,237,.62);}
-.sec.dark .no{border-color:#FF6B5A;color:#FF6B5A;}
 /* white outline button for dark ground */
 .btn.w{border:1px solid rgba(255,255,255,.35);background:transparent;color:#fff;}
 .btn.w:hover{border-color:#fff;background:rgba(255,255,255,.08);transform:translateY(-2px);}
+
+/* ---------- refusals: the manifesto ---------- */
+.mfhead{text-align:center;margin-inline:auto;}
+.mfhead .lede{margin-inline:auto;}
+.mf{max-width:880px;margin:clamp(30px,4.4vw,54px) auto 0;display:grid;
+  gap:clamp(28px,3.6vw,46px);text-align:center;}
+.mfi h3{font-size:clamp(1.45rem,3.1vw,2.5rem);font-weight:800;letter-spacing:-.032em;
+  line-height:1.15;color:rgba(255,255,255,.94);}
+.strike span{position:relative;display:inline;padding:0 .1em;
+  -webkit-box-decoration-break:clone;box-decoration-break:clone;}
+.strike span::after{content:"";position:absolute;left:0;top:56%;height:.085em;width:0;
+  background:var(--red);border-radius:2px;transform:rotate(-1.4deg);transform-origin:left center;
+  pointer-events:none;}
+.mfi.in .strike span::after{width:100%;transition:width .55s var(--ease) .3s;}
+.mfi:not(.in) .strike span::after{transition:none;}
+.no-js .strike span::after{width:100%;}
+.mfi p{color:rgba(232,234,237,.6);font-size:.95rem;max-width:56ch;margin:10px auto 0;}
 
 /* ---------- heritage interlude ---------- */
 .heritage-band{position:relative;isolation:isolate;overflow:hidden;color:#fff;
