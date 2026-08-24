@@ -12,9 +12,10 @@
    Output is committed, so Vercel serves pure static files with no
    build step of its own.
    ============================================================ */
-import { readFileSync, writeFileSync, mkdirSync, readdirSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
+import { createHash } from "node:crypto";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const SITE = "https://wulftek-website.vercel.app";
@@ -102,6 +103,16 @@ const SCHEMA = {
 /* ---------------- helpers ---------------- */
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
+/** Stamp CSS and JS URLs with a hash of their contents.
+ *  Those files are served with a long cache, so without this a returning
+ *  visitor gets fresh HTML against a stale stylesheet. The hash changes
+ *  whenever the file does, which retires the old URL. */
+const assetUrl = (...parts) => {
+  const rel = "/" + parts.join("/");
+  const hash = createHash("sha1").update(readFileSync(join(ROOT, ...parts))).digest("hex").slice(0, 8);
+  return `${rel}?v=${hash}`;
+};
+
 const SERVICE_PAGES = ["performance", "economy", "agricultural"];
 
 /** Mark the nav link for the current page so it renders as active. */
@@ -137,7 +148,8 @@ const { MARQUE } = loadData();
 
 function render({ key, path, accent, title, desc, scripts = [], schema = [], body, hero = false }) {
   const js = ["config.js", "site.js", ...scripts]
-    .map((f) => `<script src="/assets/js/${f}" defer></script>`).join("\n");
+    .map((f) => `<script src="${assetUrl("assets", "js", f)}" defer></script>`).join("\n");
+  const css = `<link rel="stylesheet" href="${assetUrl("assets", "css", "site.css")}">`;
   const head = schema
     .map((s) => `<script type="application/ld+json">${JSON.stringify(SCHEMA[s])}</script>`).join("\n");
 
@@ -149,6 +161,7 @@ function render({ key, path, accent, title, desc, scripts = [], schema = [], bod
     .replace(/\{\{ACCENT\}\}/g, accent)
     .replace(/\{\{KEY\}\}/g, key)
     .replace(/\{\{BODYCLASS\}\}/g, hero ? "has-hero" : "")
+    .replace(/\{\{CSS\}\}/g, css)
     .replace(/\{\{HEAD\}\}/g, head)
     .replace(/\{\{HEADER\}\}/g, markNav(header, key))
     .replace(/\{\{CONTENT\}\}/g, body)
