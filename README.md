@@ -26,8 +26,20 @@ with a shortened version on the home page.
   is needed for live lookups.
 - **Booking form** — front-end only; submissions go nowhere yet.
 
-## Stack conventions (mirroring DJ-Website)
+## Deployment
 
-- Static site, deployed via GitHub → Vercel.
-- GitHub org: `TalonInsights` (repo not created yet).
-- Vercel team: `talon-insights` (project not created yet).
+- **Live:** https://wulftek-website.vercel.app
+- **GitHub:** `TalonInsights/Wulftek-Website` (public, `main`)
+- **Vercel:** `talon-insights` team, project `wulftek-website`. Static site,
+  no build step — pushes to `main` deploy automatically.
+- Security headers are set in `vercel.json`. No rewrites are needed because
+  the site is hash-routed, so every route is served from `index.html` at `/`.
+
+## Known limitation: hash routing and SEO
+
+All nine views live behind `#/` fragments, which search engines do not index as
+separate URLs. The per-route `<title>` and `<meta description>` the script sets
+are never seen by a crawler, so the whole site competes as a single page. For a
+local-search business ("ECU remapping Telford", "tractor remapping Shropshire")
+this is worth converting to real paths before any SEO push — it needs a router
+change plus one rewrite per route in `vercel.json`.

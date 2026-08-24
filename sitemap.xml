@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The site is hash-routed (#/route), so every page is served from a single
+     indexable URL. If the routing is converted to real paths, add one <url>
+     entry per route here. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://wulftek-website.vercel.app/</loc><lastmod>2026-08-24</lastmod><changefreq>monthly</changefreq><priority>1.0</priority></url>
+</urlset>
