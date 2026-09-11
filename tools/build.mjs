@@ -93,7 +93,7 @@ const SCHEMA = {
   },
   faq: {
     "@context": "https://schema.org", "@type": "FAQPage", mainEntity: [
-      ["Is remapping legal in the UK?", "Yes. Remapping is legal. You must declare it to your insurer, and we provide the details in writing. Removing emissions equipment is not legal for road use, which is why we do not do it."],
+      ["Is remapping legal in the UK?", "Yes. Remapping is legal. You must declare it to your insurer, and we provide the details in writing."],
       ["Can a remap be reversed?", "Yes. The original factory file is read off and archived against your registration before anything is changed, so the vehicle can be returned to standard at any time."],
       ["Will a remap affect my insurance?", "It must be declared. A remap is a modification like any other and an undeclared one can invalidate a claim."],
       ["Does anything get removed from the engine?", "No. On a standard remap no parts are removed or replaced. The software is read out, rewritten and written back."]
