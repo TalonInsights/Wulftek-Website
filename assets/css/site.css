@@ -700,6 +700,26 @@ footer p{color:#8B929C;font-size:.88rem;}
 .rp-form .plate input{font-size:clamp(1.6rem,4.2vw,2.2rem);padding:14px 8px;}
 
 /* ==========================================================
+   ASK-YOUR-TUNER GRID — the explainer page
+   From the vault (1521): the cells carry their own shared edges,
+   so the rules divide the block instead of cards. Its gradient
+   wash and icon library are both Never List items, so the hover
+   is a single flat tint — which is also the one-property rule.
+   ========================================================== */
+.askgrid{display:grid;grid-template-columns:repeat(2,1fr);
+  border-top:1px solid var(--line);border-left:1px solid var(--line);}
+.askc{padding:clamp(24px,3vw,38px);
+  border-right:1px solid var(--line);border-bottom:1px solid var(--line);
+  transition:background-color .18s var(--ease);}
+.askc:hover{background:rgba(20,22,26,.035);}
+.askc h3{font-size:clamp(1.02rem,1.5vw,1.2rem);line-height:1.3;margin-bottom:10px;
+  max-width:24ch;text-wrap:balance;}
+.askc p{color:var(--ink-2);font-size:.95rem;line-height:1.6;margin:0;max-width:46ch;}
+@media(max-width:720px){
+  .askgrid{grid-template-columns:1fr;}
+}
+
+/* ==========================================================
    Q&A DISCLOSURE — the explainer page
    Built from the vault: 9602's statement-size titles, 11311's
    measurement-free height (STY-B-189: grid-template-rows 0fr->1fr
