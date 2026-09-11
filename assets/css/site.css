@@ -15,6 +15,7 @@
   --line-2:#EAE8E2;
 
   --red:#D23A28;      --red-rgb:210,58,40;
+  --steel:#3F7CB8;    --steel-rgb:63,124,184;   /* fourth discipline: fleet and HGV */
   --red-dark:#A82C1D;
   --green:#1F8A5F;    --green-rgb:31,138,95;
   --amber:#A9761C;    --amber-rgb:169,118,28;
@@ -203,6 +204,7 @@ body.nav .bg i:nth-child(3){transform:translateY(-5px) rotate(-45deg);}
 .c1{--dc:var(--red);--dc-rgb:var(--red-rgb);}
 .c2{--dc:var(--green);--dc-rgb:var(--green-rgb);}
 .c3{--dc:var(--amber);--dc-rgb:var(--amber-rgb);}
+.c4{--dc:var(--steel);--dc-rgb:var(--steel-rgb);}
 
 /* ---------- steps ---------- */
 .steps{counter-reset:s;display:grid;gap:0;}
@@ -610,6 +612,13 @@ footer p{color:#8B929C;font-size:.88rem;}
   .panel:hover .pov,.panel:focus-visible .pov{opacity:.75;}
   .panel:hover .pcopy,.panel:focus-visible .pcopy{max-height:180px;opacity:1;transform:none;margin:12px 0 0;}
   .panel:hover .pgo,.panel:focus-visible .pgo{max-height:40px;opacity:1;transform:none;margin-top:14px;}
+}
+/* four panels are too narrow to read side by side on a laptop, so they
+   fall to a 2x2 before they stack */
+@media(min-width:981px) and (max-width:1340px){
+  .panels{flex-wrap:wrap;height:auto;}
+  .panel{flex:1 1 calc(50% - 6px);height:clamp(300px,32vw,380px);}
+  .panel:hover,.panel:focus-visible{flex-grow:1;}
 }
 @media(max-width:980px){
   .panels{flex-direction:column;height:auto;margin-inline:0;padding-inline:var(--gut);gap:14px;}

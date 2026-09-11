@@ -49,7 +49,7 @@
   function put(id, v) {
     var e = document.getElementById(id);
     if (!e) return;
-    e.textContent = v || "—";
+    e.textContent = v || "–";
     e.classList.toggle("e", !v);
   }
   function clip(s, n) { return s.length > n ? s.slice(0, n) + "…" : s; }

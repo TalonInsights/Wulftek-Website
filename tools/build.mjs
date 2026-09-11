@@ -25,7 +25,7 @@ const read = (...p) => readFileSync(join(ROOT, ...p), "utf8");
 const PAGES = [
   {
     key: "index", path: "/", out: "index.html", accent: "perf",
-    title: "WulfTek Tuning — ECU remapping in Telford, Shropshire",
+    title: "WulfTek Tuning: ECU remapping in Telford, Shropshire",
     desc: "Independent ECU remapping in Telford for cars, vans, tractors and plant. Enter your registration for an instant idea of what your vehicle could do.",
     scripts: ["data.js", "reg-lookup.js", "home.js"], schema: ["business", "faq"], hero: true
   },
@@ -52,19 +52,19 @@ const PAGES = [
   },
   {
     key: "vehicles", path: "/vehicles", out: "vehicles.html", accent: "perf",
-    title: "Vehicles we remap — cars, vans, tractors | WulfTek Tuning",
+    title: "Vehicles we remap: cars, vans, tractors | WulfTek Tuning",
     desc: "Find your make and see typical remap figures. Audi, BMW, Volkswagen, Mercedes, Ford, Vauxhall, plus John Deere, New Holland, Fendt, JCB and more.",
     scripts: ["data.js", "reg-lookup.js"]
   },
   {
     key: "about", path: "/about", out: "about.html", accent: "perf",
-    title: "Our story — three generations in the trade | WulfTek Tuning",
+    title: "Our story: three generations in the trade | WulfTek Tuning",
     desc: "From a grandfather's workshop to modern ECU calibration. The family history behind WulfTek Tuning in Telford, Shropshire."
   },
   {
     key: "events", path: "/events", out: "events.html", accent: "perf",
     title: "Events & car meets around Telford | WulfTek Tuning",
-    desc: "Where to find WulfTek Tuning — shows, meets, charity runs and open evenings across Shropshire and the Midlands."
+    desc: "Where to find WulfTek Tuning: shows, meets, charity runs and open evenings across Shropshire and the Midlands."
   },
   {
     key: "book", path: "/book", out: "book.html", accent: "perf",

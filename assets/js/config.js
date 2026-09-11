@@ -27,8 +27,16 @@ function wm(file, w) { return WM + encodeURIComponent(file) + "?width=" + (w || 
 
 return {
   road: {
-    url: wm("VW Golf VII GTi CS Front.JPG", 1400), zone: "z-road",
-    brief: "A customer's car on the move — three-quarter rear, motion, not a static car park shot."
+    url: wm("2017 Volkswagen Golf R TSi.jpg", 1400), zone: "z-road",
+    brief: "A customer's car on the move: three-quarter rear, motion, not a static car park shot."
+  },
+  economy: {
+    url: wm("Toyota Prius Mk3 Taxi R Sarti.jpg", 1400), zone: "z-van",
+    brief: "A high-mileage car that earns its living. A taxi, a rep's estate, anything doing the miles that make fuel hurt."
+  },
+  fleet: {
+    url: wm("Lorry line-up at Broadstreet Common - geograph.org.uk - 2488700.jpg", 1600), zone: "z-road",
+    brief: "Lorries lined up at a yard, or a row of liveried vans. The point is more than one of them."
   },
   van: {
     url: wm("2019 Ford Transit 350 Leader Ecoblue 2.0.jpg", 1400), zone: "z-van",

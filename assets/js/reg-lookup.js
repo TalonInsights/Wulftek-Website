@@ -113,7 +113,7 @@
       var msg = box.querySelector("#cap-msg");
       msg.style.display = "block";
       msg.textContent = box.querySelector("#cap-con").value.trim()
-        ? "Thanks — that is with the workshop now. You will hear back shortly."
+        ? "Thanks, that is with the workshop now. You will hear back shortly."
         : "Add a phone number or email so we can get back to you.";
     });
   }
@@ -122,7 +122,7 @@
     var key = tidy(value);
     if (key.length < 4) {
       if (errEl) {
-        errEl.textContent = "That doesn't look like a full registration — have another go.";
+        errEl.textContent = "That doesn't look like a full registration. Have another go.";
         errEl.classList.add("on");
       }
       return;
