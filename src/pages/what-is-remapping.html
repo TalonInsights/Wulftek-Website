@@ -25,14 +25,54 @@
 
 <div class="sec">
   <div class="wrap">
-    <div class="head rv"><h2>The six questions everybody actually asks</h2></div>
-    <div class="steps rv">
-      <div class="step"><span class="sn"></span><div><h3>If there's spare performance, why didn't the manufacturer use it?</h3><p>Because they write one file for the whole world. It has to survive poor fuel in one country and forty-degree heat in another, cope with owners who never service the car, and hit an emissions and tax bracket that suits the sales brochure. They also want the cheaper model in the range to stay slower than the expensive one — which is why two cars with the same engine often leave the factory with different power figures. Building for one vehicle, in one climate, driven by one person, leaves genuine headroom.</p></div></div>
-      <div class="step"><span class="sn"></span><div><h3>Does anything physically change on the car?</h3><p>No. On a standard remap nothing is removed, cut, drilled or replaced. We connect to the diagnostic socket — the same one a garage plugs into — read the software off, rewrite it, and write it back. The car looks exactly the same when you collect it.</p></div></div>
-      <div class="step"><span class="sn"></span><div><h3>Is it safe for the engine?</h3><p>It depends entirely on who writes the file. The manufacturer builds in margins: how hot things are allowed to get, how much pressure a cylinder can take, how lean the mixture is permitted to run. A good file moves fuel, air and timing together and leaves those margins alone. A bad file buys a bigger headline number by spending them — and it will still drive fine for a while, which is what makes it dangerous. That's the whole difference, and it's invisible from the driver's seat.</p></div></div>
-      <div class="step"><span class="sn"></span><div><h3>Can it be undone?</h3><p>Yes, and this matters more than people realise. Before anything is changed we read your original factory file off and archive it against your registration. It can be put back at any point — before a dealer visit, before selling the car, or simply because you changed your mind.</p></div></div>
-      <div class="step"><span class="sn"></span><div><h3>What about insurance and warranty?</h3><p>Insurance: declare it. It's a modification and an undeclared one can invalidate a claim, so we give you the specifics in writing to forward straight to your insurer. Most policies take it without drama. Warranty: if the vehicle is still under manufacturer cover, assume a remap affects it — we'll say so plainly before you book, and the archived original means it can go back to standard first.</p></div></div>
-      <div class="step"><span class="sn"></span><div><h3>Remap or tuning box?</h3><p>A tuning box sits between the ECU and the engine and fakes the signals going past — the ECU thinks one thing is happening while something else actually is. A remap changes the decisions at source, which is more precise and lets us respect the safety limits rather than work around them. Boxes have one advantage: they unplug. If that matters more to you than quality of result, we'll tell you honestly.</p></div></div>
+    <div class="head rv" style="max-width:26ch;"><h2>The questions everybody actually asks</h2></div>
+
+    <!-- Disclosure set. Panels are always rendered and collapsed with
+         grid-template-rows:0fr, never display:none, so the answers stay in the
+         page for a crawler and for find-in-page. -->
+    <div class="qa rv" id="qa">
+      <div class="qai" data-open>
+        <h3><button type="button" class="qab" aria-expanded="true" aria-controls="qa1" id="qat1">
+          <span>If there's spare performance, why didn't the manufacturer use it?</span>
+          <span class="qam" aria-hidden="true"></span>
+        </button></h3>
+        <div class="qap" id="qa1" role="region" aria-labelledby="qat1"><div><p>Because they write one file for the whole world. It has to survive poor fuel in one country and forty-degree heat in another, cope with owners who never service the car, and hit an emissions and tax bracket that suits the sales brochure. They also want the cheaper model in the range to stay slower than the expensive one — which is why two cars with the same engine often leave the factory with different power figures. Building for one vehicle, in one climate, driven by one person, leaves genuine headroom.</p></div></div>
+      </div>
+      <div class="qai">
+        <h3><button type="button" class="qab" aria-expanded="false" aria-controls="qa2" id="qat2">
+          <span>Does anything physically change on the car?</span>
+          <span class="qam" aria-hidden="true"></span>
+        </button></h3>
+        <div class="qap" id="qa2" role="region" aria-labelledby="qat2"><div><p>No. On a standard remap nothing is removed, cut, drilled or replaced. We connect to the diagnostic socket — the same one a garage plugs into — read the software off, rewrite it, and write it back. The car looks exactly the same when you collect it.</p></div></div>
+      </div>
+      <div class="qai">
+        <h3><button type="button" class="qab" aria-expanded="false" aria-controls="qa3" id="qat3">
+          <span>Is it safe for the engine?</span>
+          <span class="qam" aria-hidden="true"></span>
+        </button></h3>
+        <div class="qap" id="qa3" role="region" aria-labelledby="qat3"><div><p>It depends entirely on who writes the file. The manufacturer builds in margins: how hot things are allowed to get, how much pressure a cylinder can take, how lean the mixture is permitted to run. A good file moves fuel, air and timing together and leaves those margins alone. A bad file buys a bigger headline number by spending them — and it will still drive fine for a while, which is what makes it dangerous. That's the whole difference, and it's invisible from the driver's seat.</p></div></div>
+      </div>
+      <div class="qai">
+        <h3><button type="button" class="qab" aria-expanded="false" aria-controls="qa4" id="qat4">
+          <span>Can it be undone?</span>
+          <span class="qam" aria-hidden="true"></span>
+        </button></h3>
+        <div class="qap" id="qa4" role="region" aria-labelledby="qat4"><div><p>Yes, and this matters more than people realise. Before anything is changed we read your original factory file off and archive it against your registration. It can be put back at any point — before a dealer visit, before selling the car, or simply because you changed your mind.</p></div></div>
+      </div>
+      <div class="qai">
+        <h3><button type="button" class="qab" aria-expanded="false" aria-controls="qa5" id="qat5">
+          <span>What about insurance and warranty?</span>
+          <span class="qam" aria-hidden="true"></span>
+        </button></h3>
+        <div class="qap" id="qa5" role="region" aria-labelledby="qat5"><div><p>Insurance: declare it. It's a modification and an undeclared one can invalidate a claim, so we give you the specifics in writing to forward straight to your insurer. Most policies take it without drama. Warranty: if the vehicle is still under manufacturer cover, assume a remap affects it — we'll say so plainly before you book, and the archived original means it can go back to standard first.</p></div></div>
+      </div>
+      <div class="qai">
+        <h3><button type="button" class="qab" aria-expanded="false" aria-controls="qa6" id="qat6">
+          <span>Remap or tuning box?</span>
+          <span class="qam" aria-hidden="true"></span>
+        </button></h3>
+        <div class="qap" id="qa6" role="region" aria-labelledby="qat6"><div><p>A tuning box sits between the ECU and the engine and fakes the signals going past — the ECU thinks one thing is happening while something else actually is. A remap changes the decisions at source, which is more precise and lets us respect the safety limits rather than work around them. Boxes have one advantage: they unplug. If that matters more to you than quality of result, we'll tell you honestly.</p></div></div>
+      </div>
     </div>
   </div>
 </div>

@@ -32,7 +32,8 @@ const PAGES = [
   {
     key: "what-is-remapping", path: "/what-is-remapping", out: "what-is-remapping.html", accent: "perf",
     title: "What is ECU remapping? A plain-English guide | WulfTek Tuning",
-    desc: "What a remap actually is, whether it's safe, whether it's legal, what it does to your insurance and warranty, and how to tell a good tuner from a bad one."
+    desc: "What a remap actually is, whether it's safe, whether it's legal, what it does to your insurance and warranty, and how to tell a good tuner from a bad one.",
+    scripts: ["qa.js"]
   },
   {
     key: "performance", path: "/performance", out: "performance.html", accent: "perf",

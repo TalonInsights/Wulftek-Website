@@ -699,6 +699,50 @@ footer p{color:#8B929C;font-size:.88rem;}
 .rp-form .plate{box-shadow:0 14px 40px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.07);}
 .rp-form .plate input{font-size:clamp(1.6rem,4.2vw,2.2rem);padding:14px 8px;}
 
+/* ==========================================================
+   Q&A DISCLOSURE — the explainer page
+   Built from the vault: 9602's statement-size titles, 11311's
+   measurement-free height (STY-B-189: grid-template-rows 0fr->1fr
+   with min-block-size:0, never max-height), 23530's accessibility
+   model. Numbering deliberately absent — six questions are not a
+   sequence, and decorative numbering on a non-sequence is on the
+   Never List. Panels are always rendered (STY-A-161), so the
+   answers stay in the HTML for crawlers and find-in-page.
+   ========================================================== */
+.qa{max-width:880px;margin-inline:auto;border-top:1px solid var(--line);}
+.qai{border-bottom:1px solid var(--line);}
+.qai h3{margin:0;font-size:inherit;font-weight:inherit;letter-spacing:normal;}
+
+.qab{display:flex;width:100%;gap:clamp(18px,3vw,40px);align-items:baseline;
+  justify-content:space-between;text-align:left;background:none;border:0;cursor:pointer;
+  padding:clamp(22px,2.6vw,30px) 0;color:var(--ink);
+  font-family:var(--dsp);font-weight:700;letter-spacing:-.026em;line-height:1.22;
+  font-size:clamp(1.15rem,2.1vw,1.6rem);
+  /* one property, 180ms, declared at rest so it plays both ways */
+  transition:color .18s var(--ease);}
+.qab:hover{color:var(--accent);}
+.qai[data-open] .qab{color:var(--accent);}
+
+/* plus-to-minus marker, centred rather than offset (STY-B-132) */
+.qam{position:relative;flex:none;width:18px;height:18px;place-self:center;align-self:center;}
+.qam::before,.qam::after{content:"";position:absolute;inset:50% 0 auto 0;height:2px;
+  background:currentColor;transform:translateY(-50%);}
+.qam::after{transform:translateY(-50%) rotate(90deg);transition:transform .22s var(--ease);}
+.qai[data-open] .qam::after{transform:translateY(-50%) rotate(0deg);}
+
+/* height without measurement: the panel is always in the DOM */
+.qap{display:grid;grid-template-rows:0fr;transition:grid-template-rows .28s var(--ease);}
+.qai[data-open] .qap{grid-template-rows:1fr;}
+.qap>div{overflow:hidden;min-block-size:0;min-height:0;}
+.qap p{color:var(--ink-2);font-size:1rem;line-height:1.65;margin:0;max-width:68ch;
+  padding-bottom:clamp(22px,2.6vw,30px);}
+
+/* nothing is hidden without script, and nothing animates if motion is off */
+.no-js .qap{grid-template-rows:1fr;}
+@media(prefers-reduced-motion:reduce){
+  .qap,.qam::after{transition:none;}
+}
+
 /* keyboard users get a way past the nav */
 .skip{position:absolute;left:-9999px;top:0;z-index:200;background:var(--ink);color:#fff;
   padding:12px 20px;border-radius:0 0 8px 0;font-weight:600;text-decoration:none;}
