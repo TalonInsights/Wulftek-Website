@@ -64,7 +64,8 @@ const PAGES = [
   {
     key: "events", path: "/events", out: "events.html", accent: "perf",
     title: "Events & car meets around Telford | WulfTek Tuning",
-    desc: "Where to find WulfTek Tuning: shows, meets, charity runs and open evenings across Shropshire and the Midlands."
+    desc: "Where to find WulfTek Tuning: shows, meets, charity runs and open evenings across Shropshire and the Midlands.",
+    scripts: ["events.js"], module: true
   },
   {
     key: "book", path: "/book", out: "book.html", accent: "perf",
@@ -147,9 +148,14 @@ const header = read("src", "partials", "header.html");
 const footer = read("src", "partials", "footer.html");
 const { MARQUE } = loadData();
 
-function render({ key, path, accent, title, desc, scripts = [], schema = [], body, hero = false }) {
+function render({ key, path, accent, title, desc, scripts = [], schema = [], body, hero = false, module = false }) {
   const js = ["config.js", "site.js", ...scripts]
-    .map((f) => `<script src="${assetUrl("assets", "js", f)}" defer></script>`).join("\n");
+    .map((f) => (module && f === "events.js")
+      /* events.js imports the Supabase config, so it has to load as a
+         module. Modules defer by default, hence no defer attribute. */
+      ? `<script type="module" src="${assetUrl("assets", "js", f)}"></script>`
+      : `<script src="${assetUrl("assets", "js", f)}" defer></script>`)
+    .join("\n");
   const css = `<link rel="stylesheet" href="${assetUrl("assets", "css", "site.css")}">`;
   const head = schema
     .map((s) => `<script type="application/ld+json">${JSON.stringify(SCHEMA[s])}</script>`).join("\n");

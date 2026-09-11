@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/site.css?v=3159281a">
+<link rel="stylesheet" href="/assets/css/site.css?v=0122bf81">
 
 <script>document.documentElement.className=document.documentElement.className.replace(/\bno-js\b/,"js");</script>
 </head>
@@ -68,29 +68,71 @@
   </div>
 </div>
 
-<div class="sec sm">
+<div class="sec">
   <div class="wrap">
-    <h2 class="rv" style="margin-bottom:20px;">Where you'll find us</h2>
-    <p class="lede rv" style="margin-bottom:28px;">We're out most months somewhere between Telford and the Midlands. Ring the workshop and we'll tell you where we'll be next, or ask us along to something you're running.</p>
-    <div class="btns rv"><a class="btn p" href="/book">Get in touch <span class="ar">&#8594;</span></a></div>
+    <div class="head ctr rv">
+      <span class="kicker">The diary</span>
+      <h2>Where you'll find us next</h2>
+      <p class="lede">Everything we have booked in, soonest first. Each one drops off the day after it finishes.</p>
+    </div>
+
+    <!-- Filled from Supabase by /assets/js/events.js. The states below are
+         all rendered server-side, so a visitor never sees a blank panel:
+         an unconfigured site and a failed load both say something useful
+         rather than looking like an empty diary. -->
+    <div id="evlist" class="evlist rv" data-state="unconfigured">
+      <div class="evitems"></div>
+
+      <p class="evstate" data-when="loading">Loading the diary&hellip;</p>
+
+      <div class="evstate" data-when="unconfigured">
+        <p class="lede" style="margin:0 auto;">We're out most months somewhere between Telford and the Midlands. Ring the workshop and we'll tell you where we'll be next.</p>
+      </div>
+
+      <div class="evstate" data-when="empty">
+        <p class="lede" style="margin:0 auto;">Nothing in the diary at the moment. Ring the workshop and we'll tell you what's coming up, or ask us along to something you're running.</p>
+      </div>
+
+      <div class="evstate" data-when="error">
+        <p class="lede" style="margin:0 auto;">The diary won't load just now. Ring the workshop and we'll tell you where we'll be next.</p>
+      </div>
+    </div>
+
+    <div class="btns rv" style="justify-content:center;margin-top:clamp(28px,3.4vw,44px);">
+      <a class="btn p" href="/book">Get in touch <span class="ar">&rarr;</span></a>
+    </div>
   </div>
 </div>
 
 <hr class="hr">
 
 <div class="sec">
-  <div class="wrap two lead">
-    <div class="rv">
+  <div class="wrap">
+    <div class="head ctr rv">
       <span class="kicker">Why we bother</span>
       <h2>Local means something here</h2>
-      <p class="lede" style="margin-top:16px;">If you're running a meet, a show or a charity day around Telford and want us there with a stand, a laptop, or just an extra pair of hands, get in touch. We'd rather support what's already happening than invent our own.</p>
-      <div class="btns" style="margin-top:26px;"><a class="btn p" href="/book">Invite us to an event <span class="ar">→</span></a></div>
+      <p class="lede">If you're running a meet, a show or a charity day around Telford and want us there with a stand, a laptop, or just an extra pair of hands, get in touch. We'd rather support what's already happening than invent our own.</p>
     </div>
-    <div class="grid g2 rv" style="gap:14px;">
-      <div class="card"><h3>Car meets</h3><p>Evening meets around Telford and the wider county. Come and look at the work on cars belonging to people you can actually talk to.</p></div>
-      <div class="card"><h3>Shows and static displays</h3><p>Weekend shows across the Midlands. Bring the car and ask the questions you'd never get a straight answer to over the phone.</p></div>
-      <div class="card"><h3>Charity and community days</h3><p>If you're raising money and want a stand, a laptop or just an extra pair of hands, ask us. We'd rather support what's already happening.</p></div>
-      <div class="card"><h3>Farm and trade days</h3><p>Agricultural shows and open days, where a conversation about machinery is far more use in person than in writing.</p></div>
+    <div class="askgrid rv">
+      <div class="askc">
+        <h3>Car meets</h3>
+        <p>Evening meets around Telford and the wider county. Come and look at the work on cars belonging to people you can actually talk to.</p>
+      </div>
+      <div class="askc">
+        <h3>Shows and static displays</h3>
+        <p>Weekend shows across the Midlands. Bring the car and ask the questions you'd never get a straight answer to over the phone.</p>
+      </div>
+      <div class="askc">
+        <h3>Charity and community days</h3>
+        <p>If you're raising money and want a stand, a laptop or just an extra pair of hands, ask us.</p>
+      </div>
+      <div class="askc">
+        <h3>Farm and trade days</h3>
+        <p>Agricultural shows and open days, where a conversation about machinery is far more use in person than in writing.</p>
+      </div>
+    </div>
+    <div class="btns rv" style="justify-content:center;margin-top:clamp(28px,3.4vw,44px);">
+      <a class="btn solidpad o" href="/book">Invite us to an event</a>
     </div>
   </div>
 </div>
@@ -134,5 +176,6 @@
 
 <script src="/assets/js/config.js?v=ac9d07b7" defer></script>
 <script src="/assets/js/site.js?v=470e1be9" defer></script>
+<script type="module" src="/assets/js/events.js?v=e141304a"></script>
 </body>
 </html>

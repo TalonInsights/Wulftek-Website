@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en-GB" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Events admin | WulfTek Tuning</title>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="theme-color" content="#F1F0EC">
+<link rel="icon" type="image/png" sizes="180x180" href="/assets/img/favicon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/site.css">
+<link rel="stylesheet" href="/admin/admin.css">
+<script>document.documentElement.className=document.documentElement.className.replace(/\bno-js\b/,"js");</script>
+</head>
+<body class="adminbody">
+
+<header id="hdr" class="stuck">
+  <div class="wrap bar">
+    <a class="brand" href="/" aria-label="WulfTek Tuning home">
+      <img class="logo" src="/assets/img/logo-wordmark.png" width="944" height="200" alt="">
+    </a>
+    <span class="adminbadge mono">Events admin</span>
+    <button type="button" class="btn solidpad o" id="btnSignOut" hidden>Sign out</button>
+  </div>
+</header>
+
+<main id="main" class="wrap adminmain">
+
+  <!-- not configured yet -->
+  <section class="apane" id="paneSetup" hidden>
+    <h1>Not connected yet</h1>
+    <p class="lede">This panel needs a Supabase project before it can do anything. The public site is unaffected: the events page keeps its "ring the workshop" message until this is set up.</p>
+    <ol class="setuplist">
+      <li>Create a Supabase project in the <b>London (eu-west-2)</b> region. The region is permanent.</li>
+      <li>Run <code>supabase/schema.sql</code> in the SQL editor.</li>
+      <li>Turn <b>off</b> sign-ups under Authentication, then create your own user and tick Auto Confirm.</li>
+      <li>Add yourself to <code>public.admins</code> using the snippet at the top of the schema.</li>
+      <li>Paste the project URL and anon key into <code>assets/js/sb-config.js</code>.</li>
+      <li>Run <code>supabase/tests/rls.sql</code> and check every row says passed.</li>
+    </ol>
+    <p class="sub">The full walkthrough is in <code>docs/EVENTS-SETUP.md</code>.</p>
+  </section>
+
+  <!-- sign in -->
+  <section class="apane" id="paneGate" hidden>
+    <h1>Sign in</h1>
+    <p class="lede" id="gateLede">We will email you a code. No password to remember.</p>
+    <form id="gateForm" class="gatebox" novalidate>
+      <label class="fld" id="wrapEmail">
+        <span>Email</span>
+        <input id="gateEmail" type="email" autocomplete="email" placeholder="you@example.com" required>
+      </label>
+      <label class="fld" id="wrapCode" hidden>
+        <span>Code from the email</span>
+        <input id="gateCode" type="text" inputmode="numeric" autocomplete="one-time-code" placeholder="000000">
+      </label>
+      <div class="btns">
+        <button type="submit" class="btn p" id="gateBtn">Send me a code <span class="ar">&rarr;</span></button>
+        <button type="button" class="btn solidpad o" id="gateBack" hidden>Use a different address</button>
+      </div>
+      <p class="amsg" id="gateMsg" role="status" aria-live="polite"></p>
+    </form>
+  </section>
+
+  <!-- the board -->
+  <section class="apane" id="paneBoard" hidden>
+    <div class="ahead">
+      <div>
+        <h1>Events</h1>
+        <p class="lede">Anything published shows on the public events page from today until the day it finishes.</p>
+      </div>
+      <button type="button" class="btn p" id="btnNew">Add an event <span class="ar">&rarr;</span></button>
+    </div>
+
+    <p class="amsg" id="boardMsg" role="status" aria-live="polite"></p>
+
+    <div id="evAdmin" class="evadmin" data-state="loading">
+      <p class="astate" data-when="loading">Loading the diary…</p>
+      <p class="astate" data-when="empty">Nothing in the diary yet. Add the first one.</p>
+      <p class="astate" data-when="error">Could not load the diary. Check the connection details and try again.</p>
+      <div class="arows"></div>
+    </div>
+  </section>
+</main>
+
+<!-- add / edit -->
+<dialog id="evDialog" class="evdialog">
+  <form id="evForm" method="dialog" novalidate>
+    <h2 id="evDialogTitle">Add an event</h2>
+
+    <label class="fld"><span>What is it called</span>
+      <input id="f-title" type="text" maxlength="160" required placeholder="Telford Cars &amp; Coffee"></label>
+
+    <div class="fields f2">
+      <label class="fld"><span>Kind</span>
+        <select id="f-kind">
+          <option value="meet">Car meet</option>
+          <option value="show">Show</option>
+          <option value="charity">Charity day</option>
+          <option value="trade">Trade &amp; farm day</option>
+        </select></label>
+      <label class="fld"><span>Time (optional)</span>
+        <input id="f-time" type="text" maxlength="80" placeholder="from 6pm"></label>
+    </div>
+
+    <div class="fields f2">
+      <label class="fld"><span>Date</span>
+        <input id="f-starts" type="date" required></label>
+      <label class="fld"><span>Last day (only if it runs over)</span>
+        <input id="f-ends" type="date"></label>
+    </div>
+
+    <div class="fields f2">
+      <label class="fld"><span>Venue (optional)</span>
+        <input id="f-venue" type="text" maxlength="160" placeholder="Telford Town Park"></label>
+      <label class="fld"><span>Town (optional)</span>
+        <input id="f-town" type="text" maxlength="120" placeholder="Telford"></label>
+    </div>
+
+    <label class="fld"><span>A line or two (optional)</span>
+      <textarea id="f-blurb" maxlength="600" placeholder="What is on, and why somebody should come."></textarea></label>
+
+    <label class="fld"><span>Link (optional)</span>
+      <input id="f-url" type="url" placeholder="https://"></label>
+
+    <label class="chk">
+      <input id="f-published" type="checkbox">
+      <span>Show this on the website</span>
+    </label>
+
+    <p class="amsg" id="formMsg" role="status" aria-live="polite"></p>
+
+    <div class="bknav">
+      <button type="button" class="btn solidpad o" id="btnCancel">Cancel</button>
+      <div class="btns">
+        <button type="button" class="btn solidpad danger" id="btnDelete" hidden>Delete</button>
+        <button type="button" class="btn p" id="btnSave">Save <span class="ar">&rarr;</span></button>
+      </div>
+    </div>
+  </form>
+</dialog>
+
+<script type="module" src="/admin/admin.js"></script>
+</body>
+</html>

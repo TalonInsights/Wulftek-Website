@@ -42,6 +42,9 @@ body[data-accent="eco"]{--accent:var(--green);--accent-rgb:var(--green-rgb);}
 body[data-accent="agri"]{--accent:var(--amber);--accent-rgb:var(--amber-rgb);}
 
 *{box-sizing:border-box;}
+/* The hidden attribute must beat a component's own display rule, or a
+   button set display:inline-flex stays on screen while marked hidden. */
+[hidden]{display:none !important;}
 html{scroll-behavior:smooth;}
 body{margin:0;background:var(--bg);color:var(--ink);
   font-family:var(--body);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
@@ -429,17 +432,50 @@ label.fld>span{display:block;font-family:var(--mono);font-size:.63rem;letter-spa
 .faq details[open] summary::after{transform:rotate(225deg) translateY(-3px);}
 .faq .a{padding:0 0 22px;color:var(--ink-2);font-size:.97rem;max-width:72ch;}
 
-/* ---------- events ---------- */
-.ev{display:grid;grid-template-columns:96px 1fr auto;gap:clamp(16px,2.4vw,30px);align-items:center;
-  padding:22px 0;border-bottom:1px solid var(--line);}
-.ev:first-child{border-top:1px solid var(--line);}
-.evd{background:var(--card);border:1px solid var(--line-2);border-radius:9px;padding:11px;text-align:center;}
-.evd b{display:block;font-family:var(--dsp);font-weight:800;font-size:1.5rem;letter-spacing:-.03em;line-height:1;}
-.evd span{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--accent);display:block;margin-top:5px;}
-.ev h3{margin-bottom:4px;} .ev p{color:var(--ink-2);font-size:.92rem;margin:0;}
-.evt{font-family:var(--mono);font-size:.62rem;letter-spacing:.13em;text-transform:uppercase;
-  color:var(--ink-2);border:1px solid var(--line);border-radius:20px;padding:6px 13px;white-space:nowrap;background:var(--card);}
+/* ---------- events diary ----------
+   The rules divide the diary, not cards, so it sits with the rest of the
+   site. Each entry leads with the date because that is what a visitor is
+   scanning for. States are driven by data-state on the container, and the
+   fallbacks are in the HTML so an unconfigured or failed load still says
+   something useful instead of showing an empty page. */
+.evlist{margin-top:clamp(24px,3vw,40px);}
+.evstate{display:none;text-align:center;color:var(--ink-2);padding:clamp(24px,4vw,52px) 0;}
+.evlist[data-state="loading"]      .evstate[data-when="loading"],
+.evlist[data-state="unconfigured"] .evstate[data-when="unconfigured"],
+.evlist[data-state="empty"]        .evstate[data-when="empty"],
+.evlist[data-state="error"]        .evstate[data-when="error"]{display:block;}
+
+.evitems{display:none;}
+.evlist[data-state="listed"] .evitems{
+  display:grid;grid-template-columns:repeat(2,1fr);
+  border-top:1px solid var(--line);border-left:1px solid var(--line);}
+
+.evrow{display:grid;grid-template-columns:auto 1fr;gap:clamp(16px,2.2vw,28px);
+  padding:clamp(22px,2.8vw,34px);
+  border-right:1px solid var(--line);border-bottom:1px solid var(--line);}
+
+.evdate{text-align:center;flex:none;min-width:58px;}
+.evdate b{display:block;font-family:var(--dsp);font-weight:800;letter-spacing:-.04em;
+  font-size:clamp(1.9rem,3vw,2.5rem);line-height:1;color:var(--ink);
+  font-variant-numeric:tabular-nums;}
+.evdate span{display:block;margin-top:4px;font-family:var(--mono);font-size:.64rem;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--accent);}
+
+.evbody{min-width:0;}
+.evkind{display:block;font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ink-3);margin-bottom:6px;}
+.evbody h3{font-size:clamp(1.05rem,1.5vw,1.22rem);line-height:1.25;margin-bottom:8px;
+  text-wrap:balance;}
+.evbody h3 a{text-decoration:underline;text-underline-offset:3px;
+  text-decoration-color:var(--line);transition:text-decoration-color .18s var(--ease);}
+.evbody h3 a:hover{text-decoration-color:var(--accent);}
+.evmeta{font-family:var(--mono);font-size:.74rem;color:var(--ink-2);margin:0;
+  font-variant-numeric:tabular-nums;}
+.evblurb{color:var(--ink-2);font-size:.94rem;line-height:1.6;margin:10px 0 0;max-width:46ch;}
+
+@media(max-width:720px){
+  .evlist[data-state="listed"] .evitems{grid-template-columns:1fr;}
+}
 
 /* ---------- story ---------- */
 .quote{font-family:var(--dsp);font-weight:600;font-size:clamp(1.3rem,2.5vw,1.85rem);
