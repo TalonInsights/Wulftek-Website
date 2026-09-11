@@ -696,6 +696,21 @@ footer p{color:#8B929C;font-size:.88rem;}
 .hb-in{text-align:center;max-width:760px;}
 .hb-in .quote{color:#fff;max-width:none;margin:0 auto;}
 .hb-in .qa{color:rgba(255,255,255,.6);margin-top:18px;}
+
+/* the stand photograph is WulfTek's own and current, so it keeps its colour:
+   no duotone, no grain, and a plain scrim that only buys legibility */
+.standband .img img{filter:none;object-position:50% 44%;}
+/* daylight photo and the text sits over the busiest part of it, so the scrim
+   is darkest at the centre and lifts towards the edges to keep the van and
+   the banner readable */
+.standband .hb-ov{
+  background:
+    radial-gradient(78% 74% at 50% 44%,rgba(8,11,16,.58) 0%,rgba(8,11,16,.16) 72%,rgba(8,11,16,0) 100%),
+    linear-gradient(180deg,rgba(8,11,16,.46) 0%,rgba(8,11,16,.52) 50%,rgba(8,11,16,.74) 100%);}
+.standband .hb-ov::after{display:none;}
+/* the caption here is a sentence, not a credit line */
+.standband .qa{font-family:var(--body);font-size:1rem;line-height:1.65;letter-spacing:normal;
+  text-transform:none;color:rgba(255,255,255,.78);max-width:56ch;margin:20px auto 0;}
 .hb-btn{margin-top:28px;border-color:rgba(255,255,255,.35);background:transparent;color:#fff;}
 .hb-btn:hover{border-color:#fff;background:rgba(255,255,255,.08);}
 .hb-btn .ar{background:rgba(255,255,255,.16);}
