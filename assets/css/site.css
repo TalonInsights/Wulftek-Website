@@ -541,6 +541,17 @@ footer h4{font-family:var(--mono);font-weight:500;font-size:.65rem;letter-spacin
 footer a{display:block;color:#C7CBD1;text-decoration:none;font-size:.93rem;padding:5px 0;transition:color .18s;}
 footer a:hover{color:var(--accent);}
 footer p{color:#8B929C;font-size:.88rem;}
+/* Discreet way in to the events admin. It reads as the full stop at the
+   end of the line above, so it does not invite a customer to poke at it,
+   but the owner can find it without being told a URL. Padded out to a
+   real tap target rather than a one-pixel dot. */
+.staff{color:inherit;text-decoration:none;display:inline-block;
+  /* padding makes a real tap target; the negative margins cancel it so the
+     dot still sits flush against the sentence it is pretending to end */
+  padding:10px 12px;margin:-10px -12px;
+  transition:color .18s var(--ease);}
+.staff:hover{color:var(--accent);}
+
 .fb{margin-top:clamp(32px,4vw,52px);padding-top:22px;border-top:1px solid #232A33;display:flex;
   justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.8rem;color:#6E747D;}
 

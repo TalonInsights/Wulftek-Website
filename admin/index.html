@@ -28,20 +28,20 @@
 
 <main id="main" class="wrap adminmain">
 
-  <!-- not configured yet -->
-  <section class="apane" id="paneSetup" hidden>
-    <h1>Not connected yet</h1>
-    <p class="lede">This panel needs a Supabase project before it can do anything. The public site is unaffected: the events page keeps its "ring the workshop" message until this is set up.</p>
-    <ol class="setuplist">
-      <li>Create a Supabase project in the <b>London (eu-west-2)</b> region. The region is permanent.</li>
-      <li>Run <code>supabase/schema.sql</code> in the SQL editor.</li>
-      <li>Turn <b>off</b> sign-ups under Authentication, then create your own user and tick Auto Confirm.</li>
-      <li>Add yourself to <code>public.admins</code> using the snippet at the top of the schema.</li>
-      <li>Paste the project URL and anon key into <code>assets/js/sb-config.js</code>.</li>
-      <li>Run <code>supabase/tests/rls.sql</code> and check every row says passed.</li>
-    </ol>
-    <p class="sub">The full walkthrough is in <code>docs/EVENTS-SETUP.md</code>.</p>
-  </section>
+  <!-- Preview mode. Shown only while the Supabase keys are empty: the
+       board is fully usable but backed by this browser alone, so the
+       workflow can be tried and approved before anything is paid for. -->
+  <div class="pbanner" id="previewBanner" hidden>
+    <div>
+      <b>Preview mode.</b> There is no database yet, so anything you add here is
+      saved <b>in this browser only</b>. It will not appear for anyone else, and
+      it is not on the public website. Use it to try the workflow and tell us
+      what to change.
+      <span class="psub">Once the database is connected, this panel asks you to
+      sign in and everything you add goes live for real.</span>
+    </div>
+    <button type="button" class="btn solidpad o" id="btnClearPreview">Clear preview</button>
+  </div>
 
   <!-- sign in -->
   <section class="apane" id="paneGate" hidden>

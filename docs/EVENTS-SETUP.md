@@ -8,6 +8,24 @@ notice instead of an error.
 Everything below is done once, by the site owner. **Do not hand the keys to
 anyone else, and never put the `service_role` key in this repository.**
 
+## Before any of that: preview mode
+
+While the keys are empty the panel runs in **preview mode**. There is no
+sign-in and no database: the board works, but anything added is saved in that
+browser alone. It is not public, and it does not reach anyone else.
+
+That is there so the workflow can be tried and approved before paying for a
+Supabase project. Add a few events, look at `/events` in the same browser, and
+say what needs changing.
+
+**The sign-in gate comes back on its own** the moment the keys below are filled
+in. Nobody has to remember to re-enable it, and preview events do not migrate:
+they stay in the browser and the real diary starts empty.
+
+Way in: the full stop at the end of the footer's right-hand line is a link to
+`/admin`. It is deliberately quiet rather than secret, and `/admin` is excluded
+from search engines either way.
+
 ---
 
 ## 1. Create the project

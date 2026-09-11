@@ -62,8 +62,30 @@ if (mount) {
     </article>`;
   }
 
+  /* Preview events live in this browser only, written by /admin while
+     there is no database. A real visitor has none, so they still get the
+     "ring the workshop" message: nothing here leaks a draft to anybody. */
+  function previewRows() {
+    try {
+      const rows = JSON.parse(localStorage.getItem("wt:events:preview") || "[]");
+      const today = new Date().toISOString().slice(0, 10);
+      return rows
+        .filter((r) => r.published && (r.ends_on || r.starts_on) >= today)
+        .sort((a, b) => a.starts_on.localeCompare(b.starts_on));
+    } catch (e) { return []; }
+  }
+
   (async function load() {
-    if (!CONFIGURED) { setState("unconfigured"); return; }
+    if (!CONFIGURED) {
+      const rows = previewRows();
+      if (rows.length) {
+        mount.querySelector(".evitems").innerHTML = rows.map(card).join("");
+        setState("listed");
+      } else {
+        setState("unconfigured");
+      }
+      return;
+    }
     setState("loading");
     try {
       const { createClient } = await import("https://esm.sh/@supabase/supabase-js@2.45.4");
