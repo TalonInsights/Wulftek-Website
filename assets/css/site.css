@@ -74,6 +74,10 @@ p{margin:0 0 1.05em;} p:last-child{margin-bottom:0;}
 .head .lede{margin-top:16px;}
 .head.ctr{text-align:center;margin-inline:auto;}
 .head.ctr .lede{margin-inline:auto;}
+
+/* Centred display type strands a single word on the last line at some
+   widths. Balancing evens the lines out; browsers without it just wrap. */
+.hero h1,.head.ctr h2,.mfi h3,.rp-in h2,.hb-in .quote{text-wrap:balance;}
 .grid{display:grid;gap:clamp(16px,1.8vw,24px);}
 .g2{grid-template-columns:repeat(2,1fr);} .g3{grid-template-columns:repeat(3,1fr);}
 .g4{grid-template-columns:repeat(4,1fr);}
